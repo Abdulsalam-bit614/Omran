@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" id="meta-theme" content="#1a56db">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="عُمران">
+<link rel="manifest" href="manifest.json">
+<title>عُمران – سوريا</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --blue:#1a56db;--blue-dk:#1241a8;--blue-lt:#e8f0fe;--blue-mid:#3b82f6;
+  --green:#22c55e;--wa:#25d366;--red:#ef4444;--amber:#f59e0b;--purple:#7c3aed;
+  --bg:#f0f4f8;--white:#fff;
+  --gray:#f1f5f9;--gray2:#e2e8f0;--gray3:#cbd5e1;--gray4:#94a3b8;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --r:16px;--rsm:12px;--rxs:8px;
+  --shadow:0 4px 24px rgba(15,23,42,.08);
+  --shadow-blue:0 4px 20px rgba(26,86,219,.18);
+}
+html,body{height:100%;font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;font-size:15px}
+input,textarea,select,button{font-family:'Tajawal',sans-serif}
+a{text-decoration:none;color:inherit}
+#app{max-width:430px;margin:0 auto;min-height:100vh;background:var(--white);position:relative;overflow:hidden}
+.page{display:none;flex-direction:column;min-height:100vh}
+.page.active{display:flex;animation:pageIn .2s ease}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tb{background:var(--blue);padding:14px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:60;flex-shrink:0}
+.tb-brand{display:flex;flex-direction:column}
+.tb-logo{color:#fff;font-size:21px;font-weight:900;letter-spacing:-0.5px;line-height:1}
+.tb-city{color:rgba(255,255,255,.6);font-size:11px;margin-top:1px}
+.f1{flex:1}
+.btn-back{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:var(--rxs);padding:7px 12px;font-size:15px;font-weight:700;cursor:pointer}
+.btn-tb{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:var(--rxs);padding:7px 12px;font-size:13px;font-weight:700;cursor:pointer;position:relative}
+.btn-tb-solid{background:#fff;border:none;color:var(--blue);border-radius:var(--rxs);padding:7px 14px;font-size:14px;font-weight:800;cursor:pointer}
+.btn{border:none;border-radius:var(--rsm);padding:14px 20px;font-size:15px;font-weight:800;cursor:pointer;display:block;width:100%;text-align:center;transition:all .15s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:var(--shadow-blue)}
+.btn-secondary{background:var(--gray);color:var(--text);border:1.5px solid var(--gray2)}
+.btn-wa{background:var(--wa);color:#fff;border:none;border-radius:var(--rsm);padding:10px 16px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-call{background:var(--blue);color:#fff;border:none;border-radius:var(--rsm);padding:10px 16px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-sm{padding:9px 14px;font-size:13px;border-radius:var(--rxs)}
+.fg{margin-bottom:14px}
+.fl{font-size:14px;font-weight:700;color:var(--text);margin-bottom:7px;display:block}
+.fi{width:100%;border:1.5px solid var(--gray2);border-radius:var(--rsm);padding:12px 14px;font-size:15px;color:var(--text);outline:none;transition:all .15s;background:#fff}
+.fi:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,.08)}
+.fi::placeholder{color:var(--text3)}
+textarea.fi{resize:none;min-height:80px;line-height:1.6}
+select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath fill='%2394a3b8' d='M7 10L0 0h14z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;padding-left:36px}
+.card{background:#fff;border-radius:var(--r);border:1px solid var(--gray2);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.av{border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;overflow:hidden}
+.badge{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;gap:3px}
+.b-green{background:#dcfce7;color:#15803d}
+.b-red{background:#fee2e2;color:#dc2626}
+.b-blue{background:var(--blue-lt);color:var(--blue)}
+.b-gray{background:var(--gray);color:var(--text2)}
+.b-amber{background:#fef3c7;color:#92400e}
+.stars{display:flex;gap:2px}
+.star{font-size:18px;cursor:pointer;transition:transform .1s;color:#e2e8f0;line-height:1}
+.star.on{color:#f59e0b}
+.star:hover{transform:scale(1.2)}
+.star-sm{font-size:14px}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sb{background:var(--gray);border:1.5px solid transparent;border-radius:var(--rxs);padding:11px 8px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;text-align:center;transition:all .15s}
+.sb.on{background:var(--blue-lt);border-color:var(--blue);color:var(--blue);font-weight:700}
+.tabs{display:flex;background:var(--gray);border-radius:var(--rsm);padding:4px;gap:4px}
+.tab{flex:1;padding:9px 4px;border-radius:var(--rxs);border:none;background:transparent;font-size:13px;font-weight:700;color:var(--text3);cursor:pointer;transition:all .15s}
+.tab.on{background:#fff;color:var(--blue);box-shadow:0 1px 6px rgba(0,0,0,.08)}
+.sbar{display:flex;align-items:center;background:#fff;border:1.5px solid var(--gray2);border-radius:var(--rsm);padding:11px 14px;gap:9px;transition:border-color .15s}
+.sbar:focus-within{border-color:var(--blue)}
+.sbar input{border:none;outline:none;flex:1;font-size:15px;color:var(--text);direction:rtl;background:transparent}
+.sbar input::placeholder{color:var(--text3)}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.st{font-size:17px;font-weight:800;color:var(--text)}
+.sl{color:var(--blue);font-size:13px;font-weight:700;background:none;border:none;cursor:pointer}
+.pc{background:#fff;border-radius:var(--r);border:1px solid var(--gray2);padding:16px;margin-bottom:10px;cursor:pointer;transition:all .15s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.pc:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
+.verified-badge{background:var(--blue-lt);color:var(--blue);font-size:11px;font-weight:700;padding:2px 7px;border-radius:20px;display:inline-flex;align-items:center;gap:3px}
+.ci{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;border-bottom:1px solid var(--gray2);transition:background .15s}
+.ci:hover{background:var(--gray)}
+.msgs-area{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:#f8fafc}
+.bbl{max-width:82%;padding:11px 14px;border-radius:18px;font-size:14px;line-height:1.55;word-break:break-word}
+.bbl.out{background:var(--blue);color:#fff;align-self:flex-end;border-bottom-left-radius:4px}
+.bbl.in{background:#fff;color:var(--text);align-self:flex-start;border:1px solid var(--gray2);border-bottom-right-radius:4px}
+.bt{font-size:10px;opacity:.6;margin-top:4px;text-align:left}
+.vb{display:flex;align-items:center;gap:8px;min-width:165px}
+.pb{width:34px;height:34px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;flex-shrink:0}
+.out .pb{background:rgba(255,255,255,.22);color:#fff}
+.in .pb{background:var(--blue);color:#fff}
+.wv{flex:1;height:28px;display:flex;align-items:center;gap:2px}
+.wv span{width:3px;border-radius:2px;flex-shrink:0}
+.out .wv span{background:rgba(255,255,255,.5)}
+.in .wv span{background:var(--blue-mid);opacity:.55}
+.ir{display:flex;align-items:flex-end;gap:8px;padding:10px 12px;border-top:1px solid var(--gray2);background:#fff;flex-shrink:0}
+.mi{flex:1;border:1.5px solid var(--gray2);border-radius:22px;padding:10px 14px;font-size:14px;outline:none;direction:rtl;resize:none;max-height:90px;line-height:1.45;transition:border-color .15s}
+.mi:focus{border-color:var(--blue)}
+.sb2{width:40px;height:40px;border-radius:50%;background:var(--blue);border:none;color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer}
+.rb{width:40px;height:40px;border-radius:50%;background:var(--gray);border:none;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .15s}
+.rb.on{background:#fee2e2;animation:pulse 1s infinite}
+.rec-bar{display:none;align-items:center;gap:10px;padding:9px 14px;background:#fef2f2;border-top:1px solid #fecaca;flex-shrink:0}
+.rec-bar.show{display:flex}
+.rdot{width:9px;height:9px;border-radius:50%;background:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.tog-track{width:50px;height:28px;border-radius:14px;position:relative;transition:background .2s;flex-shrink:0;cursor:pointer}
+.tog-track.on{background:var(--blue)}
+.tog-track.off{background:var(--gray3)}
+.tog-thumb{position:absolute;top:3px;right:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.tog-track.on .tog-thumb{transform:translateX(-22px)}
+.tyb{background:#fff;border:2px solid var(--gray2);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;width:100%;margin-bottom:10px;text-align:right;transition:all .15s}
+.tyb:hover{border-color:var(--gray3)}
+.tyb.on{border-color:var(--blue);background:var(--blue-lt)}
+.tyb .chk{width:22px;height:22px;border-radius:50%;border:2px solid var(--gray2);margin-right:auto;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s}
+.tyb.on .chk{background:var(--blue);border-color:var(--blue);color:#fff}
+.ph{background:linear-gradient(160deg,var(--blue-dk) 0%,var(--blue-mid) 100%);padding:28px 18px 22px;text-align:center}
+.pn{color:#fff;font-size:21px;font-weight:800;margin-top:10px}
+.pr{color:rgba(255,255,255,.72);font-size:14px;margin-top:3px}
+.sr{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--gray2)}
+.sb3{text-align:center;padding:14px 8px}
+.sn{font-size:22px;font-weight:900;color:var(--blue);line-height:1}
+.slb{font-size:12px;color:var(--text3);margin-top:3px}
+.rev-card{background:var(--gray);border-radius:var(--rsm);padding:12px 14px;margin-bottom:8px}
+.hero{background:linear-gradient(160deg,var(--blue-dk) 0%,var(--blue-mid) 100%);padding:24px 18px 32px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40px;left:-40px;width:200px;height:200px;background:rgba(255,255,255,.04);border-radius:50%}
+.hero-title{color:#fff;font-size:26px;font-weight:900;letter-spacing:-.5px;line-height:1.15}
+.hero-sub{color:rgba(255,255,255,.78);font-size:14px;margin-top:6px;margin-bottom:18px}
+.bnav{display:flex;background:#fff;border-top:1px solid var(--gray2);position:sticky;bottom:0;z-index:40;flex-shrink:0}
+.nb{flex:1;padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:3px;border:none;background:transparent;color:var(--text3);font-size:11px;font-weight:700;cursor:pointer;transition:color .15s;position:relative}
+.nb.on{color:var(--blue)}
+.nb::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--blue);border-radius:0 0 2px 2px;transition:width .2s}
+.nb.on::after{width:28px}
+.ni{font-size:22px;line-height:1}
+.nb-badge{position:absolute;top:6px;right:calc(50% - 16px);background:var(--red);color:#fff;border-radius:50%;width:16px;height:16px;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.mo{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:200;align-items:flex-end;justify-content:center}
+.mo.show{display:flex}
+.mb{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;padding:20px 18px 36px;animation:mbUp .25s ease}
+@keyframes mbUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.mh{width:40px;height:4px;background:var(--gray2);border-radius:2px;margin:0 auto 16px}
+.sy{overflow-y:auto;-webkit-overflow-scrolling:touch}
+.odot{position:absolute;bottom:1px;left:1px;width:11px;height:11px;border-radius:50%;border:2px solid #fff}
+.prog-bar{height:6px;background:var(--gray2);border-radius:3px;overflow:hidden;margin-top:6px}
+.prog-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .3s}
+.admin-row{background:#fff;border:1px solid var(--gray2);border-radius:var(--rsm);padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.hscroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.spec-chip{flex-shrink:0;background:#fff;border:1.5px solid var(--gray2);border-radius:20px;padding:8px 16px;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .15s;white-space:nowrap}
+.spec-chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.stat-card{background:var(--blue-lt);border-radius:var(--rsm);padding:14px;display:flex;align-items:center;gap:12px}
+.empty{text-align:center;padding:40px 20px;color:var(--text3)}
+.empty-icon{font-size:52px;margin-bottom:12px}
+.empty-text{font-size:15px;font-weight:700;color:var(--text2);margin-bottom:6px}
+/* Photo gallery */
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px}
+.photo-thumb{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;cursor:pointer;background:var(--gray2)}
+.photo-add{width:100%;aspect-ratio:1;border:2px dashed var(--gray3);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:24px;color:var(--gray3);transition:all .15s}
+.photo-add:hover{border-color:var(--blue);color:var(--blue)}
+/* Color picker */
+.color-swatch{width:36px;height:36px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s;flex-shrink:0}
+.color-swatch.active{border-color:#fff;box-shadow:0 0 0 3px var(--blue)}
+/* Avatar upload */
+.av-upload{position:relative;display:inline-block;cursor:pointer}
+.av-upload-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;opacity:0;transition:opacity .2s}
+.av-upload:hover .av-upload-overlay{opacity:1}
+
+/* ══ PASSWORD TOGGLE ══ */
+.pass-wrap{position:relative}
+.pass-wrap .fi{padding-left:42px}
+.pass-toggle{position:absolute;left:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);padding:4px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:color .15s}
+.pass-toggle:hover{color:var(--blue)}
+
+/* ══ DASHBOARD ══ */
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.dash-card{background:#fff;border:1px solid var(--gray2);border-radius:var(--rsm);padding:14px;text-align:center;box-shadow:var(--shadow)}
+.dash-num{font-size:28px;font-weight:900;color:var(--blue);line-height:1}
+.dash-lbl{font-size:12px;color:var(--text3);margin-top:3px}
+.dash-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray2)}
+.dash-row:last-child{border-bottom:none}
+.dash-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.dash-bar-wrap{background:var(--gray);border-radius:4px;height:8px;overflow:hidden;margin-top:4px}
+.dash-bar{height:100%;border-radius:4px;transition:width .4s ease}
+.chart-wrap{background:#fff;border:1px solid var(--gray2);border-radius:var(--rsm);padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.chart-title{font-size:14px;font-weight:800;margin-bottom:12px;color:var(--text)}
+.bar-chart{display:flex;align-items:flex-end;gap:6px;height:100px;margin-top:8px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar-fill{width:100%;border-radius:4px 4px 0 0;min-height:4px;transition:height .4s ease}
+.bar-label{font-size:10px;color:var(--text3);text-align:center;line-height:1.3}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dash-spin{width:28px;height:28px;border:3px solid var(--gray2);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;margin:30px auto}
+
+/* ══ DASHBOARD PRO ══ */
+.db-tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.db-tab{background:var(--gray);border:1.5px solid transparent;border-radius:20px;padding:6px 16px;font-size:12px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .15s}
+.db-tab.on{background:var(--blue-lt);border-color:var(--blue);color:var(--blue)}
+.db-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.db-stat{background:#fff;border:1px solid var(--gray2);border-radius:var(--rsm);padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.db-stat:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.db-stat-icon{font-size:20px;margin-bottom:8px}
+.db-stat-num{font-size:26px;font-weight:900;line-height:1;margin-bottom:3px}
+.db-stat-lbl{font-size:11px;color:var(--text3);font-weight:600}
+.db-stat-bar{position:absolute;bottom:0;right:0;left:0;height:3px;border-radius:0 0 var(--rsm) var(--rsm)}
+.db-section{margin-bottom:16px}
+.db-section-title{font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.db-hbar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.db-hbar-label{font-size:12px;color:var(--text2);min-width:80px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.db-hbar-track{flex:1;background:var(--gray);border-radius:4px;height:7px;overflow:hidden}
+.db-hbar-fill{height:100%;border-radius:4px;transition:width .5s ease}
+.db-hbar-val{font-size:12px;font-weight:700;min-width:20px;text-align:left}
+.db-top-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--gray2)}
+.db-top-item:last-child{border-bottom:none}
+.db-medal{font-size:18px;min-width:24px;text-align:center}
+.db-top-name{font-weight:700;font-size:13px}
+.db-top-spec{font-size:11px;color:var(--text3)}
+.db-top-score{font-size:14px;font-weight:900;color:var(--amber)}
+.db-pie-svg{display:block;margin:0 auto 10px}
+.db-legend{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.db-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600}
+.db-legend-dot{width:8px;height:8px;border-radius:50%}
+.db-req-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--gray2);font-size:12px}
+.db-req-row:last-child{border-bottom:none}
+.db-req-spec{flex:1;font-weight:600}
+.db-req-area{color:var(--text2);font-size:11px}
+.db-activity{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--gray2)}
+.db-activity:last-child{border-bottom:none}
+.db-act-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.db-act-text{flex:1;font-size:12px;font-weight:600}
+.db-act-time{font-size:10px;color:var(--text3)}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ══ HOME ══ -->
+<div class="page active" id="pg-home">
+  <div class="tb" id="main-tb">
+    <div class="tb-brand">
+      <div class="tb-logo" id="app-name-logo">
+        <svg width="108" height="44" viewBox="0 0 108 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- بناية صغيرة (يمين) -->
+          <rect x="2" y="17" width="9" height="13" rx="1" fill="rgba(255,255,255,0.72)"/>
+          <rect x="4" y="20" width="2" height="2" fill="rgba(26,86,219,0.45)"/>
+          <rect x="7" y="20" width="2" height="2" fill="rgba(26,86,219,0.45)"/>
+          <!-- قنطرة من الصغيرة للوسطى -->
+          <path d="M11 19 Q17.5 9 24 17" stroke="rgba(255,255,255,0.92)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <!-- بناية وسطى -->
+          <rect x="24" y="11" width="12" height="19" rx="1" fill="rgba(255,255,255,0.86)"/>
+          <rect x="26" y="14" width="3" height="3" fill="rgba(26,86,219,0.38)"/>
+          <rect x="31" y="14" width="3" height="3" fill="rgba(26,86,219,0.38)"/>
+          <rect x="26" y="19" width="3" height="3" fill="rgba(26,86,219,0.38)"/>
+          <rect x="31" y="19" width="3" height="3" fill="rgba(26,86,219,0.38)"/>
+          <!-- بناية كبيرة (يسار) -->
+          <rect x="39" y="4" width="15" height="26" rx="1" fill="white"/>
+          <rect x="41" y="7"  width="4" height="3" fill="rgba(26,86,219,0.3)"/>
+          <rect x="47" y="7"  width="4" height="3" fill="rgba(26,86,219,0.3)"/>
+          <rect x="41" y="13" width="4" height="3" fill="rgba(26,86,219,0.3)"/>
+          <rect x="47" y="13" width="4" height="3" fill="rgba(26,86,219,0.3)"/>
+          <rect x="41" y="19" width="4" height="3" fill="rgba(26,86,219,0.3)"/>
+          <rect x="47" y="19" width="4" height="3" fill="rgba(26,86,219,0.3)"/>
+          <!-- خط الأرض -->
+          <line x1="1" y1="30.5" x2="56" y2="30.5" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-linecap="round"/>
+          <!-- نص عُمران تحت البنايات من اليمين لليسار -->
+          <text x="2" y="42" font-family="Tajawal, Arial, sans-serif" font-size="13" font-weight="900" fill="rgba(255,255,255,0.95)" letter-spacing="2.5">عُ  م  ر  ا  ن</text>
+        </svg>
+      </div>
+    </div>
+    <div class="f1"></div>
+    <button class="btn-tb" onclick="go('pg-chat')">💬<span id="chat-dot" style="display:none;position:absolute;top:5px;left:5px;width:8px;height:8px;background:#ef4444;border-radius:50%"></span></button>
+    <button class="btn-tb-solid" id="top-auth" onclick="go('pg-auth')">سجّل</button>
+    <span id="top-code" style="display:none;background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:.3px"></span>
+    <button class="btn-tb" id="top-me" style="display:none" onclick="go('pg-myprofile')">
+      <div class="av" id="top-av" style="width:28px;height:28px;font-size:13px;background:rgba(255,255,255,.25);color:#fff">👤</div>
+    </button>
+    <button class="btn-tb" id="top-admin" style="display:none;background:rgba(239,68,68,.25)" onclick="go('pg-admin')">⚙️</button>
+  </div>
+  <div class="hero" id="main-hero">
+    <div class="hero-title">ابنِ بثقة<br>واطمن على شغلك</div>
+    <div class="hero-sub">أفضل المعلمين والحرفيين في درعا</div>
+    <div class="sbar"><input id="hs" placeholder="ابحث: بلاط، دهان، كهرباء..." oninput="homeSearch(this.value)"><span style="color:var(--gray4);font-size:18px">🔍</span></div>
+  </div>
+  <div id="hero-out" style="padding:14px 16px 0"><button class="btn btn-primary" onclick="go('pg-auth')">⚡ ابدأ مجاناً – 30 ثانية</button></div>
+  <div id="hero-in" style="display:none;padding:14px 16px 0;gap:8px;flex-wrap:wrap">
+    <button class="btn btn-primary" style="flex:1;min-width:140px;padding:12px" onclick="go('pg-request')">⚡ اطلب معلم</button>
+    <button class="btn btn-secondary" style="flex:1;min-width:120px;padding:12px" onclick="go('pg-addprofile')">+ أضف ملفك</button>
+  </div>
+  <div style="padding:16px 16px 0">
+    <!-- فلتر المحافظة والقرية -->
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <select class="fi" id="home-city-sel" onchange="onHomeCityChange()" style="flex:1;padding:9px 12px;font-size:13px">
+        <option value="">📍 كل المناطق</option>
+      </select>
+      <select class="fi" id="home-village-sel" onchange="onHomeVillageChange()" style="flex:1;padding:9px 12px;font-size:13px;display:none">
+        <option value="">كل القرى</option>
+      </select>
+    </div>
+    <div class="hscroll" id="home-chips">
+      <button class="spec-chip on" onclick="filterChip('',this)">الكل</button>
+      <button class="spec-chip" onclick="filterChip('بلاط',this)">🔲 بلاط</button>
+      <button class="spec-chip" onclick="filterChip('دهان',this)">🖌️ دهان</button>
+      <button class="spec-chip" onclick="filterChip('كهرباء',this)">⚡ كهرباء</button>
+      <button class="spec-chip" onclick="filterChip('صحي',this)">🚰 صحي</button>
+      <button class="spec-chip" onclick="filterChip('بناء',this)">🏗️ بناء</button>
+      <button class="spec-chip" onclick="filterChip('جبس',this)">🏛️ جبس</button>
+      <button class="spec-chip" onclick="filterChip('محل',this)">🏪 محلات</button>
+    </div>
+    <div id="extra-chips" style="margin-top:8px"></div>
+  </div>
+  <div style="padding:16px;flex:1">
+    <div class="sh"><span class="st" id="pros-title">متاحون الآن</span><button class="sl" onclick="go('pg-browse')">عرض الكل ←</button></div>
+    <div id="pros-list"></div>
+  </div>
+  <div class="bnav">
+    <button class="nb on" onclick="go('pg-home')"><span class="ni">🏠</span>الرئيسية</button>
+    <button class="nb" onclick="go('pg-browse')"><span class="ni">🔍</span>تصفح</button>
+    <button class="nb" onclick="go('pg-request')"><span class="ni">📋</span>طلب</button>
+    <button class="nb" onclick="go('pg-chat')" id="nav-chat"><span class="ni">💬</span>رسائل<span class="nb-badge" id="nav-badge" style="display:none">3</span></button>
+    <button class="nb" onclick="go('pg-myprofile')"><span class="ni">👤</span>حسابي</button>
+  </div>
+</div>
+
+<!-- ══ BROWSE ══ -->
+<div class="page" id="pg-browse">
+  <div class="tb"><button class="btn-back" onclick="go('pg-home')">→</button><div class="f1 tb-logo" style="font-size:17px">تصفح المهن</div></div>
+  <div style="padding:12px 14px">
+    <div class="sbar" style="margin-bottom:8px"><input id="br-s" placeholder="ابحث..." oninput="browseFilter(this.value)"><span style="color:var(--gray4)">🔍</span></div>
+    <!-- فلتر المحافظة والقرية -->
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <select class="fi" id="br-city-sel" onchange="onBrCityChange()" style="flex:1;padding:9px 12px;font-size:13px">
+        <option value="">📍 كل المناطق</option>
+      </select>
+      <select class="fi" id="br-village-sel" onchange="onBrVillageChange()" style="flex:1;padding:9px 12px;font-size:13px;display:none">
+        <option value="">كل القرى</option>
+      </select>
+    </div>
+    <div class="tabs"><button class="tab on" onclick="brTab('all',this)">الكل</button><button class="tab" onclick="brTab('worker',this)">معلمون</button><button class="tab" onclick="brTab('store',this)">محلات</button><button class="tab" onclick="brTab('engineer',this)">مهندسون</button></div>
+  </div>
+  <div class="sy f1" style="padding:0 14px 14px" id="br-list"></div>
+  <div class="bnav">
+    <button class="nb" onclick="go('pg-home')"><span class="ni">🏠</span>الرئيسية</button>
+    <button class="nb on"><span class="ni">🔍</span>تصفح</button>
+    <button class="nb" onclick="go('pg-request')"><span class="ni">📋</span>طلب</button>
+    <button class="nb" onclick="go('pg-chat')"><span class="ni">💬</span>رسائل</button>
+    <button class="nb" onclick="go('pg-myprofile')"><span class="ni">👤</span>حسابي</button>
+  </div>
+</div>
+
+<!-- ══ REQUEST ══ -->
+<div class="page" id="pg-request">
+  <div class="tb"><button class="btn-back" onclick="go('pg-home')">→</button><div class="f1 tb-logo" style="font-size:17px">اطلب معلم</div></div>
+  <div class="sy f1" style="padding:16px" id="req-content"></div>
+  <div class="bnav">
+    <button class="nb" onclick="go('pg-home')"><span class="ni">🏠</span>الرئيسية</button>
+    <button class="nb" onclick="go('pg-browse')"><span class="ni">🔍</span>تصفح</button>
+    <button class="nb on"><span class="ni">📋</span>طلب</button>
+    <button class="nb" onclick="go('pg-chat')"><span class="ni">💬</span>رسائل</button>
+    <button class="nb" onclick="go('pg-myprofile')"><span class="ni">👤</span>حسابي</button>
+  </div>
+</div>
+
+<!-- ══ AUTH ══ -->
+<div class="page" id="pg-auth">
+  <div class="tb"><button class="btn-back" onclick="go('pg-home')">→</button><div class="f1"></div></div>
+  <div class="sy f1" style="padding:20px 16px">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-size:52px">🏗️</div>
+      <div style="font-size:23px;font-weight:900;margin-top:10px">مرحباً في عُمران</div>
+      <div style="color:var(--text2);font-size:14px;margin-top:5px">سجّل في أقل من 30 ثانية</div>
+    </div>
+    <div class="card">
+      <div class="tabs" style="margin-bottom:16px">
+        <button class="tab on" id="tab-ph" onclick="authTab('phone')">📱 رقم الهاتف</button>
+        <button class="tab" id="tab-em" onclick="authTab('email')">📧 البريد</button>
+      </div>
+      <div id="auth-ph-f"><div class="fg"><label class="fl">رقم الهاتف</label><input class="fi" id="a-phone" placeholder="09XXXXXXXX" type="tel" style="direction:ltr"></div></div>
+      <div id="auth-em-f" style="display:none"><div class="fg"><label class="fl">البريد الإلكتروني</label><input class="fi" id="a-email" placeholder="you@email.com" type="email" style="direction:ltr"></div></div>
+      <div class="fg"><label class="fl">كلمة المرور</label><div class="pass-wrap"><input class="fi" id="a-pass" placeholder="٦ أحرف على الأقل" type="password" style="direction:ltr"><button type="button" class="pass-toggle" onclick="togglePass('a-pass','eye-reg')" id="eye-reg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
+      <div class="fg"><label class="fl">تأكيد كلمة المرور</label><div class="pass-wrap"><input class="fi" id="a-pass2" placeholder="••••••••" type="password" style="direction:ltr"><button type="button" class="pass-toggle" onclick="togglePass('a-pass2','eye-reg2')" id="eye-reg2"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
+      <button class="btn btn-primary" onclick="doAuth()">متابعة →</button>
+      <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--text2)">لديك حساب؟ <button onclick="go('pg-login')" style="background:none;border:none;color:var(--blue);font-weight:700;cursor:pointer;font-size:13px">تسجيل دخول</button></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LOGIN ══ -->
+<div class="page" id="pg-login">
+  <div class="tb"><button class="btn-back" onclick="go('pg-auth')">→</button><div class="f1 tb-logo" style="font-size:17px">تسجيل دخول</div></div>
+  <div class="sy f1" style="padding:20px 16px">
+    <div style="text-align:center;margin-bottom:22px"><div style="font-size:48px">🔑</div><div style="font-size:21px;font-weight:900;margin-top:8px">مرحباً من جديد</div></div>
+    <div class="card">
+      <div class="fg"><label class="fl">رقم الهاتف أو البريد</label><input class="fi" id="l-id" placeholder="09XXXXXXXX أو email" style="direction:ltr"></div>
+      <div class="fg"><label class="fl">كلمة المرور</label><div class="pass-wrap"><input class="fi" id="l-pass" type="password" placeholder="••••••••" style="direction:ltr"><button type="button" class="pass-toggle" onclick="togglePass('l-pass','eye-login')" id="eye-login"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
+      <button class="btn btn-primary" onclick="doLogin()">دخول</button>
+      <div style="text-align:center;margin-top:12px">
+        <button onclick="openModal('mo-forgot')" style="background:none;border:none;color:var(--text3);font-size:13px;cursor:pointer;text-decoration:underline">نسيت كلمة المرور؟</button>
+      </div>
+      <p style="text-align:center;margin-top:10px;font-size:13px"><button onclick="go('pg-auth')" style="background:none;border:none;color:var(--blue);font-weight:700;cursor:pointer;font-size:13px">إنشاء حساب جديد</button></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CHOOSE TYPE ══ -->
+<div class="page" id="pg-choosetype">
+  <div class="tb"><div class="tb-logo"><svg width="90" height="44" viewBox="0 0 108 44" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="17" width="9" height="13" rx="1" fill="rgba(255,255,255,0.72)"/><path d="M11 19 Q17.5 9 24 17" stroke="rgba(255,255,255,0.92)" stroke-width="1.8" fill="none" stroke-linecap="round"/><rect x="24" y="11" width="12" height="19" rx="1" fill="rgba(255,255,255,0.86)"/><rect x="39" y="4" width="15" height="26" rx="1" fill="white"/><line x1="1" y1="30.5" x2="56" y2="30.5" stroke="rgba(255,255,255,0.35)" stroke-width="1" stroke-linecap="round"/><text x="2" y="42" font-family="Tajawal, Arial, sans-serif" font-size="13" font-weight="900" fill="rgba(255,255,255,0.95)" letter-spacing="2.5">عُ  م  ر  ا  ن</text></svg></div></div>
+  <div class="sy f1" style="padding:20px 16px">
+    <div style="text-align:center;margin-bottom:20px"><div style="font-size:22px;font-weight:900">ما نوع حسابك؟</div><div style="color:var(--text2);font-size:14px;margin-top:5px">اختر نوعاً واحداً</div></div>
+    <button class="tyb" onclick="selType('worker',this)"><span style="font-size:28px">🔨</span><div style="text-align:right"><div style="font-weight:800;font-size:16px">معلم حرفي</div><div style="font-size:13px;color:var(--text2)">بلاط، دهان، كهرباء...</div></div><div class="chk"></div></button>
+    <button class="tyb" onclick="selType('store',this)"><span style="font-size:28px">🏪</span><div style="text-align:right"><div style="font-weight:800;font-size:16px">محل مواد بناء</div><div style="font-size:13px;color:var(--text2)">بيع وتوريد</div></div><div class="chk"></div></button>
+    <button class="tyb" onclick="selType('engineer',this)"><span style="font-size:28px">📐</span><div style="text-align:right"><div style="font-weight:800;font-size:16px">مهندس</div><div style="font-size:13px;color:var(--text2)">تصميم وإشراف</div></div><div class="chk"></div></button>
+    <button class="tyb" onclick="selType('contractor',this)"><span style="font-size:28px">🏗️</span><div style="text-align:right"><div style="font-weight:800;font-size:16px">متعهد</div><div style="font-size:13px;color:var(--text2)">مقاولات ومشاريع</div></div><div class="chk"></div></button>
+    <button class="tyb" onclick="selType('client',this)"><span style="font-size:28px">👤</span><div style="text-align:right"><div style="font-weight:800;font-size:16px">عميل</div><div style="font-size:13px;color:var(--text2)">أبحث عن خدمة</div></div><div class="chk"></div></button>
+    <button class="btn btn-primary" id="confirm-type" onclick="confirmType()" style="opacity:.35" disabled>تأكيد →</button>
+  </div>
+</div>
+
+<!-- ══ ADD PROFILE ══ -->
+<div class="page" id="pg-addprofile">
+  <div class="tb"><button class="btn-back" onclick="go('pg-myprofile')">→</button><div class="f1 tb-logo" style="font-size:17px">أضف ملفك المهني</div></div>
+  <div class="sy f1" style="padding:16px">
+    <div style="background:var(--blue-lt);border-radius:var(--rsm);padding:12px 14px;margin-bottom:16px;font-size:13px;color:var(--blue)">✨ ملفك سيظهر فوراً للعملاء</div>
+    <!-- Avatar upload -->
+    <div style="text-align:center;margin-bottom:16px">
+      <div class="av-upload" onclick="document.getElementById('ap-avatar-inp').click()">
+        <div class="av" id="ap-avatar-preview" style="width:80px;height:80px;font-size:32px;background:var(--blue-lt);color:var(--blue);margin:0 auto">👤</div>
+        <div class="av-upload-overlay">📷</div>
+      </div>
+      <input type="file" id="ap-avatar-inp" accept="image/*" style="display:none" onchange="previewAvatar(this,'ap-avatar-preview')">
+      <div style="font-size:12px;color:var(--text3);margin-top:6px">اضغط لتغيير الصورة</div>
+    </div>
+    <div class="fg"><label class="fl">الاسم الكامل</label><input class="fi" id="ap-name" placeholder="مثال: أبو محمد البلاط"></div>
+    <div class="fg"><label class="fl">نوع المهنة</label><div class="sg" id="ap-specs"></div></div>
+    <div class="fg"><label class="fl">وصف خدماتك</label><textarea class="fi" id="ap-desc" placeholder="اكتب ما تقدمه للعملاء..."></textarea></div>
+    <div class="fg"><label class="fl">سنوات الخبرة</label>
+      <select class="fi" id="ap-exp">
+        <option value="">اختر...</option>
+        <option>أقل من سنة</option><option>1-3 سنوات</option><option>3-5 سنوات</option>
+        <option>5-10 سنوات</option><option>10-15 سنة</option><option>أكثر من 15 سنة</option>
+      </select>
+    </div>
+    <div class="fg"><label class="fl">المنطقة</label><input class="fi" id="ap-area" placeholder="مثال: درعا البلد..."></div>
+    <div class="fg"><label class="fl">رقم الهاتف</label><input class="fi" id="ap-phone" type="tel" placeholder="09XXXXXXXX" style="direction:ltr"></div>
+    <div class="fg"><label class="fl">واتساب (اختياري)</label><input class="fi" id="ap-wa" type="tel" placeholder="09XXXXXXXX" style="direction:ltr"></div>
+    <!-- Photos upload -->
+    <div class="fg">
+      <label class="fl">صور أعمالك (حتى 50 صورة)</label>
+      <div class="photo-grid" id="ap-photos-grid">
+        <label class="photo-add" onclick="document.getElementById('ap-photos-inp').click()">+</label>
+      </div>
+      <input type="file" id="ap-photos-inp" accept="image/*" multiple style="display:none" onchange="addPhotos(this,'ap-photos-grid')">
+    </div>
+    <div class="fg" style="display:flex;align-items:center;gap:12px">
+      <label class="fl" style="margin:0;flex:1">متاح للعمل الآن؟</label>
+      <div class="tog-track on" id="avail-track" onclick="togAvail()" style="cursor:pointer"><div class="tog-thumb"></div></div>
+    </div>
+    <button class="btn btn-primary" onclick="savePro()">حفظ ونشر الملف 🚀</button>
+  </div>
+</div>
+
+<!-- ══ PRO DETAIL ══ -->
+<div class="page" id="pg-detail">
+  <div class="tb"><button class="btn-back" onclick="goBack()">→</button><div class="f1"></div><button class="btn-tb" onclick="openChatWith(curPro)">💬 راسل</button></div>
+  <div class="sy f1">
+    <div class="ph">
+      <div class="av-upload" onclick="canEditPro()">
+        <div class="av" id="dt-av" style="width:72px;height:72px;font-size:30px;margin:0 auto;background:rgba(255,255,255,.18);color:#fff"></div>
+        <div class="av-upload-overlay" id="dt-av-edit-overlay" style="display:none">📷</div>
+      </div>
+      <div class="pn" id="dt-name"></div>
+      <div class="pr" id="dt-role"></div>
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap" id="dt-badges"></div>
+    </div>
+    <div class="sr">
+      <div class="sb3"><div class="sn" id="dt-rating">—</div><div class="slb">التقييم</div></div>
+      <div class="sb3"><div class="sn" id="dt-reviews-count">0</div><div class="slb">تقييم</div></div>
+      <div class="sb3"><div class="sn" id="dt-exp">—</div><div class="slb">خبرة</div></div>
+    </div>
+    <div style="padding:16px">
+      <div id="dt-rating-bars" style="margin-bottom:14px"></div>
+      <!-- Photos gallery -->
+      <div id="dt-photos-section"></div>
+      <div class="st" style="margin-bottom:8px">عن الخدمة</div>
+      <p id="dt-desc" style="color:var(--text2);font-size:14px;line-height:1.75;margin-bottom:16px"></p>
+      <div class="st" style="margin-bottom:8px">المنطقة</div>
+      <p id="dt-area" style="color:var(--text2);margin-bottom:16px"></p>
+      <div style="display:flex;gap:10px;margin-bottom:20px">
+        <a id="dt-call" href="#" class="btn-call" style="flex:1">📞 اتصل</a>
+        <a id="dt-wa" href="#" class="btn-wa" style="flex:1">واتساب</a>
+      </div>
+      <div class="sh"><span class="st">التقييمات</span></div>
+      <div id="dt-reviews-list"></div>
+      <div id="review-form-area"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CHAT LIST ══ -->
+<div class="page" id="pg-chat">
+  <div class="tb"><button class="btn-back" onclick="go('pg-home')">→</button><div class="f1 tb-logo" style="font-size:17px">الرسائل</div><button class="btn-tb" onclick="go('pg-newchat')">+ جديد</button></div>
+  <div class="tabs" style="margin:12px 14px 0"><button class="tab on" onclick="cTab('all',this)">الكل</button><button class="tab" onclick="cTab('worker',this)">معلمون</button><button class="tab" onclick="cTab('store',this)">محلات</button></div>
+  <div class="sy f1" id="chat-list" style="margin-top:8px"></div>
+  <div class="bnav">
+    <button class="nb" onclick="go('pg-home')"><span class="ni">🏠</span>الرئيسية</button>
+    <button class="nb" onclick="go('pg-browse')"><span class="ni">🔍</span>تصفح</button>
+    <button class="nb" onclick="go('pg-request')"><span class="ni">📋</span>طلب</button>
+    <button class="nb on"><span class="ni">💬</span>رسائل</button>
+    <button class="nb" onclick="go('pg-myprofile')"><span class="ni">👤</span>حسابي</button>
+  </div>
+</div>
+
+<!-- ══ CHAT WINDOW ══ -->
+<div class="page" id="pg-chatwin">
+  <div class="tb">
+    <button class="btn-back" onclick="go('pg-chat')">→</button>
+    <div style="position:relative;flex-shrink:0"><div class="av" id="cw-av" style="width:38px;height:38px;font-size:16px"></div><div class="odot" id="cw-dot"></div></div>
+    <div class="f1"><div style="color:#fff;font-weight:800;font-size:15px;line-height:1" id="cw-name"></div><div style="color:rgba(255,255,255,.68);font-size:11px;margin-top:2px" id="cw-status"></div></div>
+    <a id="cw-call" href="#" style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:7px 11px">📞</a>
+    <a id="cw-wa" href="#" style="background:var(--wa);color:#fff;border-radius:8px;padding:7px 11px;font-size:12px;font-weight:700">WA</a>
+  </div>
+  <div class="msgs-area" id="cw-msgs"></div>
+  <div class="rec-bar" id="rec-bar"><div class="rdot"></div><span style="font-size:13px;color:var(--red);font-weight:700">جارٍ التسجيل...</span><span style="font-size:12px;color:var(--red);margin-right:auto" id="rec-timer">0:00</span><button onclick="cancelRec()" style="background:none;border:none;color:var(--red);font-size:18px;cursor:pointer">✕</button></div>
+  <div class="ir">
+    <button class="sb2" onclick="sendMsg()">➤</button>
+    <textarea class="mi" id="msg-inp" placeholder="اكتب رسالة..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}" oninput="autoResize(this)"></textarea>
+    <button class="rb" id="rec-btn" onclick="toggleRec()">🎤</button>
+  </div>
+</div>
+
+<!-- ══ NEW CHAT ══ -->
+<div class="page" id="pg-newchat">
+  <div class="tb"><button class="btn-back" onclick="go('pg-chat')">→</button><div class="f1 tb-logo" style="font-size:17px">محادثة جديدة</div></div>
+  <div style="padding:12px 14px"><div class="sbar"><input id="nc-inp" placeholder="ابحث..." oninput="ncSearch(this.value)"><span style="color:var(--gray4)">🔍</span></div></div>
+  <div class="sy f1" id="nc-list"></div>
+</div>
+
+<!-- ══ MY PROFILE ══ -->
+<div class="page" id="pg-myprofile">
+  <div class="tb"><button class="btn-back" onclick="go('pg-home')">→</button><div class="f1 tb-logo" style="font-size:17px">حسابي</div></div>
+  <div class="sy f1" id="myprofile"></div>
+  <div class="bnav">
+    <button class="nb" onclick="go('pg-home')"><span class="ni">🏠</span>الرئيسية</button>
+    <button class="nb" onclick="go('pg-browse')"><span class="ni">🔍</span>تصفح</button>
+    <button class="nb" onclick="go('pg-request')"><span class="ni">📋</span>طلب</button>
+    <button class="nb" onclick="go('pg-chat')"><span class="ni">💬</span>رسائل</button>
+    <button class="nb on"><span class="ni">👤</span>حسابي</button>
+  </div>
+</div>
+
+<!-- ══ ADMIN ══ -->
+<div class="page" id="pg-admin">
+  <div class="tb"><button class="btn-back" onclick="go('pg-home')">→</button><div class="f1 tb-logo" style="font-size:17px">⚙️ لوحة التحكم</div></div>
+  <div class="sy f1" style="padding:16px" id="admin-content"></div>
+</div>
+
+<!-- ══ DASHBOARD ══ -->
+<div class="page" id="pg-dashboard">
+  <div class="tb">
+    <button class="btn-back" onclick="go('pg-admin')">→</button>
+    <div class="f1 tb-logo" style="font-size:16px">📊 داشبورد التحليلات</div>
+    <button class="btn-tb" onclick="renderDashboard()">🔄</button>
+  </div>
+  <div class="sy f1" style="padding:16px" id="dashboard-content"></div>
+</div>
+
+<!-- ══ ADD MEMBER (ADMIN) ══ -->
+<div class="page" id="pg-addmember">
+  <div class="tb"><button class="btn-back" onclick="go('pg-admin')">→</button><div class="f1 tb-logo" style="font-size:17px">إضافة شخص</div></div>
+  <div class="sy f1" style="padding:16px">
+    <div style="text-align:center;margin-bottom:14px">
+      <div class="av-upload" onclick="document.getElementById('am-avatar-inp').click()">
+        <div class="av" id="am-avatar-preview" style="width:72px;height:72px;font-size:28px;background:var(--blue-lt);color:var(--blue);margin:0 auto">👤</div>
+        <div class="av-upload-overlay">📷</div>
+      </div>
+      <input type="file" id="am-avatar-inp" accept="image/*" style="display:none" onchange="previewAvatar(this,'am-avatar-preview')">
+    </div>
+    <div class="fg"><label class="fl">الاسم الكامل</label><input class="fi" id="am-name" placeholder="اسم الشخص"></div>
+    <div class="fg"><label class="fl">المهنة</label><div class="sg" id="am-specs"></div></div>
+    <div class="fg"><label class="fl">وصف المهنة</label><textarea class="fi" id="am-desc" placeholder="وصف مختصر..."></textarea></div>
+    <div class="fg"><label class="fl">سنوات الخبرة</label><select class="fi" id="am-exp"><option value="">اختر...</option><option>أقل من سنة</option><option>1-3 سنوات</option><option>3-5 سنوات</option><option>5-10 سنوات</option><option>10-15 سنة</option><option>أكثر من 15 سنة</option></select></div>
+    <div class="fg"><label class="fl">المنطقة</label><input class="fi" id="am-area" placeholder="المنطقة"></div>
+    <div class="fg"><label class="fl">رقم الهاتف</label><input class="fi" id="am-phone" type="tel" placeholder="09XXXXXXXX" style="direction:ltr"></div>
+    <div class="fg"><label class="fl">واتساب</label><input class="fi" id="am-wa" type="tel" placeholder="09XXXXXXXX" style="direction:ltr"></div>
+    <div class="fg"><label class="fl">صور الأعمال</label><div class="photo-grid" id="am-photos-grid"><label class="photo-add" onclick="document.getElementById('am-photos-inp').click()">+</label></div><input type="file" id="am-photos-inp" accept="image/*" multiple style="display:none" onchange="addPhotos(this,'am-photos-grid')"></div>
+    <div class="fg"><label class="fl">نوع الحساب</label><select class="fi" id="am-type"><option value="worker">معلم حرفي</option><option value="store">محل مواد بناء</option><option value="engineer">مهندس</option><option value="contractor">متعهد</option></select></div>
+    <div class="fg" style="display:flex;align-items:center;gap:12px"><label class="fl" style="margin:0;flex:1">متاح للعمل؟</label><div class="tog-track on" id="am-avail-track" onclick="togAm()" style="cursor:pointer"><div class="tog-thumb"></div></div></div>
+    <button class="btn btn-primary" onclick="saveAdminMember()">إضافة وحفظ ✓</button>
+  </div>
+</div>
+
+<!-- ══ ADD SPECIALTY ══ -->
+<div class="page" id="pg-addspec">
+  <div class="tb"><button class="btn-back" onclick="go('pg-admin')">→</button><div class="f1 tb-logo" style="font-size:17px">إضافة مهنة جديدة</div></div>
+  <div class="sy f1" style="padding:16px">
+    <div class="fg"><label class="fl">اسم المهنة</label><input class="fi" id="sp-name" placeholder="مثال: معمرجي، نجار..."></div>
+    <div class="fg"><label class="fl">الأيقونة</label><input class="fi" id="sp-icon" placeholder="🪚" style="font-size:24px"></div>
+    <div class="fg"><label class="fl">نوع المهنة</label><select class="fi" id="sp-type"><option value="worker">معلم / حرفي</option><option value="store">محل / مورد</option><option value="engineer">مهندس</option><option value="contractor">متعهد</option></select></div>
+    <div style="border:1px solid var(--gray2);border-radius:var(--rsm);padding:14px;margin-bottom:14px"><div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:10px">المهن الحالية:</div><div id="cur-specs" style="display:flex;flex-wrap:wrap;gap:6px"></div></div>
+    <button class="btn btn-primary" onclick="saveSpec()">إضافة المهنة ✓</button>
+  </div>
+</div>
+
+<!-- ══ SETTINGS ══ -->
+<div class="page" id="pg-settings">
+  <div class="tb"><button class="btn-back" onclick="goBack()">→</button><div class="f1 tb-logo" style="font-size:17px">الإعدادات</div></div>
+  <div class="sy f1" style="padding:16px">
+    <!-- Change name -->
+    <div class="card">
+      <div style="font-weight:800;font-size:15px;margin-bottom:14px">✏️ تغيير الاسم</div>
+      <div class="fg"><input class="fi" id="set-name" placeholder="الاسم الجديد"></div>
+      <button class="btn btn-primary" style="padding:11px" onclick="saveName()">حفظ الاسم</button>
+    </div>
+    <!-- Change password -->
+    <div class="card">
+      <div style="font-weight:800;font-size:15px;margin-bottom:14px">🔑 تغيير كلمة المرور</div>
+      <div class="fg"><input class="fi" id="set-old-pass" type="password" placeholder="كلمة المرور الحالية" style="direction:ltr"></div>
+      <div class="fg"><input class="fi" id="set-new-pass" type="password" placeholder="كلمة المرور الجديدة" style="direction:ltr"></div>
+      <div class="fg"><input class="fi" id="set-new-pass2" type="password" placeholder="تأكيد كلمة المرور الجديدة" style="direction:ltr"></div>
+      <button class="btn btn-primary" style="padding:11px" onclick="savePass()">تغيير كلمة المرور</button>
+    </div>
+    <!-- Theme colors -->
+    <div class="card">
+      <div style="font-weight:800;font-size:15px;margin-bottom:14px">🎨 لون التطبيق</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <div class="color-swatch active" style="background:#1a56db" onclick="setColor('#1a56db','#1241a8','#e8f0fe',this)" title="أزرق"></div>
+        <div class="color-swatch" style="background:#16a34a" onclick="setColor('#16a34a','#15803d','#dcfce7',this)" title="أخضر"></div>
+        <div class="color-swatch" style="background:#dc2626" onclick="setColor('#dc2626','#b91c1c','#fee2e2',this)" title="أحمر"></div>
+        <div class="color-swatch" style="background:#7c3aed" onclick="setColor('#7c3aed','#6d28d9','#f3e8ff',this)" title="بنفسجي"></div>
+        <div class="color-swatch" style="background:#0891b2" onclick="setColor('#0891b2','#0e7490','#e0f2fe',this)" title="سماوي"></div>
+        <div class="color-swatch" style="background:#d97706" onclick="setColor('#d97706','#b45309','#fef3c7',this)" title="برتقالي"></div>
+        <div class="color-swatch" style="background:#0f172a" onclick="setColor('#0f172a','#020617','#f1f5f9',this)" title="أسود"></div>
+      </div>
+      <div style="font-size:12px;color:var(--text3);margin-top:10px">اختر اللون المناسب لهويتك</div>
+    </div>
+    <!-- Contact -->
+    <div class="card">
+      <div style="font-weight:800;font-size:15px;margin-bottom:14px">📩 تواصل معنا</div>
+      <a href="#" onclick="location.href=getWaLink('')" style="display:flex;align-items:center;gap:10px;color:var(--text)"><span style="font-size:22px">💬</span><div><div style="font-weight:700">واتساب</div><div style="font-size:12px;color:var(--text2)">تواصل مباشر</div></div></a>
+      <div style="height:1px;background:var(--gray2);margin:12px 0"></div>
+      <a href="mailto:ibbni.daraa@gmail.com" style="display:flex;align-items:center;gap:10px;color:var(--text)"><span style="font-size:22px">📧</span><div><div style="font-weight:700">البريد الإلكتروني</div><div style="font-size:12px;color:var(--text2)">ibbni.daraa@gmail.com</div></div></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SUCCESS ══ -->
+<div class="page" id="pg-success">
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center">
+    <div style="font-size:72px;margin-bottom:16px" id="suc-icon">✅</div>
+    <div style="font-size:23px;font-weight:900;margin-bottom:8px;color:var(--text)" id="suc-title">تم!</div>
+    <div style="color:var(--text2);font-size:15px;line-height:1.7;margin-bottom:28px;max-width:280px" id="suc-msg"></div>
+    <button class="btn btn-primary" onclick="go('pg-home')" style="max-width:260px">العودة للرئيسية</button>
+  </div>
+</div>
+
+
+<!-- ══ ADMIN EDIT PRO MODAL ══ -->
+<div class="mo" id="mo-edit-pro">
+  <div class="mb">
+    <div class="mh"></div>
+    <div style="font-size:17px;font-weight:900;margin-bottom:4px">تعديل ملف</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:16px" id="ep-pro-name"></div>
+    <div class="fg"><label class="fl">الاسم</label><input class="fi" id="ep-name" placeholder="الاسم الكامل"></div>
+    <div class="fg"><label class="fl">رقم الهاتف</label><input class="fi" id="ep-phone" type="tel" placeholder="09XXXXXXXX" style="direction:ltr"></div>
+    <div class="fg"><label class="fl">واتساب</label><input class="fi" id="ep-wa" type="tel" placeholder="09XXXXXXXX" style="direction:ltr"></div>
+    <div class="fg"><label class="fl">المنطقة</label><input class="fi" id="ep-area" placeholder="المنطقة"></div>
+    <div class="fg"><label class="fl">الوصف</label><textarea class="fi" id="ep-desc" style="min-height:70px"></textarea></div>
+    <div class="fg" style="display:flex;align-items:center;gap:12px">
+      <label class="fl" style="margin:0;flex:1">متاح للعمل؟</label>
+      <div class="tog-track on" id="ep-avail-track" onclick="togEpAvail()" style="cursor:pointer"><div class="tog-thumb"></div></div>
+    </div>
+    <button class="btn btn-primary" onclick="saveEditPro()">حفظ التعديلات ✓</button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="closeModal('mo-edit-pro')">إلغاء</button>
+  </div>
+</div>
+
+
+<!-- ══ APP SETTINGS MODAL ══ -->
+<div class="mo" id="mo-app-settings">
+  <div class="mb">
+    <div class="mh"></div>
+    <div style="font-size:17px;font-weight:900;margin-bottom:16px">⚙️ إعدادات التطبيق</div>
+    <div class="card" style="margin-bottom:12px">
+      <div style="font-weight:800;font-size:14px;margin-bottom:12px">📞 معلومات التواصل</div>
+      <div class="fg"><label class="fl">رقم الواتساب</label><input class="fi" id="cfg-wa" style="direction:ltr" placeholder="+963XXXXXXXXX"></div>
+      <div class="fg"><label class="fl">رقم الهاتف</label><input class="fi" id="cfg-phone" style="direction:ltr" placeholder="+963XXXXXXXXX"></div>
+      <div class="fg" style="margin-bottom:0"><label class="fl">البريد الإلكتروني الأول</label><input class="fi" id="cfg-email1" style="direction:ltr" placeholder="email@example.com"></div>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div style="font-weight:800;font-size:14px;margin-bottom:12px">📧 بريد إلكتروني إضافي</div>
+      <div class="fg" style="margin-bottom:0"><input class="fi" id="cfg-email2" style="direction:ltr" placeholder="email2@example.com (اختياري)"></div>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div style="font-weight:800;font-size:14px;margin-bottom:12px">🏗️ اسم التطبيق</div>
+      <div class="fg" style="margin-bottom:0"><input class="fi" id="cfg-appname" placeholder="مثال: عُمران – سوريا"></div>
+    </div>
+    <button class="btn btn-primary" onclick="saveAppSettings()">حفظ الإعدادات ✓</button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="closeModal('mo-app-settings')">إلغاء</button>
+  </div>
+</div>
+
+<!-- ══ REVIEW MODAL ══ -->
+<div class="mo" id="mo-review">
+  <div class="mb">
+    <div class="mh"></div>
+    <div style="font-size:19px;font-weight:900;margin-bottom:6px">قيّم تجربتك</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:16px" id="rev-pro-name"></div>
+    <div style="margin-bottom:16px"><div style="font-size:14px;font-weight:700;margin-bottom:10px">تقييمك</div>
+      <div class="stars" id="rev-stars">
+        <span class="star" onclick="setStar(1)">★</span><span class="star" onclick="setStar(2)">★</span>
+        <span class="star" onclick="setStar(3)">★</span><span class="star" onclick="setStar(4)">★</span>
+        <span class="star" onclick="setStar(5)">★</span>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">تعليقك (اختياري)</label><textarea class="fi" id="rev-text" placeholder="كيف كانت تجربتك؟" style="min-height:80px"></textarea></div>
+    <button class="btn btn-primary" onclick="submitReview()">إرسال التقييم ⭐</button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="closeModal('mo-review')">إلغاء</button>
+  </div>
+</div>
+
+<!-- ══ PHOTO VIEWER ══ -->
+<div class="mo" id="mo-photo">
+  <div style="width:100%;max-width:430px;padding:20px;text-align:center">
+    <button onclick="closeModal('mo-photo')" style="background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;float:left;margin-bottom:10px">✕</button>
+    <img id="mo-photo-img" src="" style="width:100%;max-height:70vh;object-fit:contain;border-radius:12px;margin-top:10px">
+  </div>
+</div>
+
+<!-- ══ FORGOT PASSWORD MODAL ══ -->
+<div class="mo" id="mo-forgot">
+  <div class="mb">
+    <div class="mh"></div>
+    <div style="text-align:center;margin-bottom:16px">
+      <div style="font-size:36px">🔐</div>
+      <div style="font-size:18px;font-weight:900;margin-top:8px">نسيت كلمة المرور؟</div>
+      <div style="font-size:13px;color:var(--text2);margin-top:4px">أدخل رقم هاتفك أو بريدك لاسترجاع كلمة المرور</div>
+    </div>
+    <!-- Step 1: إدخال الهوية -->
+    <div id="forgot-step1">
+      <div class="fg"><label class="fl">رقم الهاتف أو البريد</label><input class="fi" id="forgot-id" placeholder="09XXXXXXXX أو email" style="direction:ltr"></div>
+      <div id="forgot-err" style="color:var(--red);font-size:13px;min-height:18px;margin-bottom:8px"></div>
+      <button class="btn btn-primary" onclick="forgotStep1()">تحقق من الحساب</button>
+    </div>
+    <!-- Step 2: عرض كلمة المرور -->
+    <div id="forgot-step2" style="display:none">
+      <div style="background:var(--blue-lt);border-radius:var(--rsm);padding:16px;text-align:center;margin-bottom:16px">
+        <div style="font-size:12px;color:var(--text2);margin-bottom:6px">كلمة مرورك هي:</div>
+        <div id="forgot-pass-display" style="font-size:22px;font-weight:900;color:var(--blue);letter-spacing:2px;direction:ltr"></div>
+      </div>
+      <button class="btn btn-primary" onclick="forgotGoLogin()">تسجيل الدخول الآن</button>
+    </div>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="closeForgot()">إلغاء</button>
+  </div>
+</div>
+
+<script>
+/* ══════════ CONFIG ══════════ */
+const ADMIN_PHONE='0900000000', ADMIN_PASS='admin123';
+
+/* ══ APP CONFIG (يمكن تغييرها من لوحة الأدمن) ══ */
+let appConfig={
+  waPhone:'+963912345678',
+  phone:'+963912345678',
+  email1:'ibbni.daraa@gmail.com',
+  email2:'',
+  appName:'عُمران – سوريا',
+};
+let epProId=null, epAvailOn=true;
+
+/* ══════════ STATE ══════════ */
+let curUser=null,curType=null,selTypeVal=null;
+let curPro=null,curChatId=null,prevPg='pg-home';
+let isRec=false,recInt=null,recSecs=0,playBtn=null;
+let apSpecVal=null,amSpecVal=null;
+let availOn=true,amAvailOn=true;
+let selStar=0,revProId=null;
+let homeFilt='',homeSearchV='';
+let amAvatarData=null,apAvatarData=null;
+// فلتر المدن
+let filterCity='',filterVillage='';
+let brFilterCity='',brFilterVillage='';
+
+/* ══════════ SYRIA DATA ══════════ */
+const SYRIA={
+  'دمشق':['المزة','كفرسوسة','البرامكة','ركن الدين','باب توما','المهاجرين','دمر','قدسيا','المالكي'],
+  'ريف دمشق':['دوما','عربين','زملكا','جرمانا','صيدنايا','يبرود','الزبداني','معضمية الشام','داريا','قطنا','النبك','سعسع'],
+  'حلب':['العزيزية','الشهباء','السليمانية','إعزاز','منبج','الباب','جرابلس','عفرين','عين العرب','أعزاز'],
+  'درعا':['درعا البلد','درعا المحطة','نوى','المزيريب','الصنمين','طفس','بصرى الشام','إنخل','الحراك','جاسم','داعل','عتمان','ازرع','خربة غزالة'],
+  'حمص':['الوعر','الزهراء','الرستن','تلبيسة','القصير','تدمر','تلكلخ','المخرم','حمص القديمة'],
+  'حماة':['مصياف','السلمية','محردة','صوران','مورك','اللطامنة','حماة القديمة'],
+  'اللاذقية':['جبلة','القرداحة','الحفة','سلمى','اللاذقية القديمة'],
+  'طرطوس':['صافيتا','بانياس','الشيخ بدر','دريكيش','القدموس'],
+  'إدلب':['معرة النعمان','أريحا','جسر الشغور','سرمين','بنش','سرمدا','أطمة'],
+  'دير الزور':['الميادين','البوكمال','الأشارة','موحسن'],
+  'الرقة':['الطبقة','تل أبيض','سلوك'],
+  'الحسكة':['القامشلي','المالكية','رأس العين','عامودا','الشدادي'],
+  'السويداء':['شهبا','صلخد','القريا','ضمير'],
+  'القنيطرة':['فيق','البعث','خان أرنبة'],
+};
+
+function initCitySelects(){
+  const cities=Object.keys(SYRIA);
+  ['home-city-sel','br-city-sel'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    cities.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;el.appendChild(o);});
+  });
+}
+
+function onHomeCityChange(){
+  filterCity=document.getElementById('home-city-sel').value;
+  filterVillage='';
+  const vSel=document.getElementById('home-village-sel');
+  vSel.innerHTML='<option value="">كل القرى</option>';
+  if(filterCity&&SYRIA[filterCity]){
+    SYRIA[filterCity].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;vSel.appendChild(o);});
+    vSel.style.display='';
+  }else{vSel.style.display='none';}
+  renderPros();
+}
+function onHomeVillageChange(){
+  filterVillage=document.getElementById('home-village-sel').value;
+  renderPros();
+}
+function onBrCityChange(){
+  brFilterCity=document.getElementById('br-city-sel').value;
+  brFilterVillage='';
+  const vSel=document.getElementById('br-village-sel');
+  vSel.innerHTML='<option value="">كل القرى</option>';
+  if(brFilterCity&&SYRIA[brFilterCity]){
+    SYRIA[brFilterCity].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;vSel.appendChild(o);});
+    vSel.style.display='';
+  }else{vSel.style.display='none';}
+  renderBrowse();
+}
+function onBrVillageChange(){
+  brFilterVillage=document.getElementById('br-village-sel').value;
+  renderBrowse();
+}
+
+/* ══════════ DATA ══════════ */
+let specialties=[
+  {id:'بلاط وسيراميك',icon:'🔲',type:'worker'},
+  {id:'دهان وديكور',icon:'🖌️',type:'worker'},
+  {id:'كهرباء',icon:'⚡',type:'worker'},
+  {id:'صحي وسباكة',icon:'🚰',type:'worker'},
+  {id:'بناء وترميم',icon:'🏗️',type:'worker'},
+  {id:'جبس وديكور',icon:'🏛️',type:'worker'},
+  {id:'حديد وألمنيوم',icon:'🔩',type:'worker'},
+  {id:'نجارة',icon:'🪵',type:'worker'},
+  {id:'محل مواد بناء',icon:'🏪',type:'store'},
+  {id:'هندسة مدنية',icon:'📐',type:'engineer'},
+  {id:'مقاولات',icon:'🏢',type:'contractor'},
+];
+
+let professionals=[
+  {id:1,name:'أبو محمد البلاط',type:'worker',spec:'بلاط وسيراميك',desc:'متخصص في تركيب البلاط والسيراميك لأكثر من 12 سنة.',area:'درعا البلد',exp:'10-15 سنة',phone:'0912345678',wa:'0912345678',avail:true,verified:true,mine:false,avatar:null,photos:[],
+    reviews:[{author:'أحمد خليل',stars:5,text:'شغل ممتاز ونظيف',date:'قبل ٣ أيام'},{author:'محمد',stars:4,text:'معلم شاطر',date:'قبل أسبوع'}]},
+  {id:2,name:'أستاذ خالد الدهان',type:'worker',spec:'دهان وديكور',desc:'دهان داخلي وخارجي وورق حائط.',area:'المزيريب',exp:'5-10 سنوات',phone:'0923456789',wa:'0923456789',avail:true,verified:true,mine:false,avatar:null,photos:[],
+    reviews:[{author:'سامر',stars:5,text:'أحسن دهان بالمنطقة',date:'قبل يومين'}]},
+  {id:3,name:'معلم سامر الكهربائي',type:'worker',spec:'كهرباء',desc:'كهرباء منازل وتجاري وصيانة شاملة.',area:'نوى',exp:'10-15 سنة',phone:'0934567890',wa:'',avail:false,verified:true,mine:false,avatar:null,photos:[],
+    reviews:[{author:'خالد',stars:5,text:'سريع وأمين',date:'قبل ٥ أيام'}]},
+  {id:4,name:'أبو حسن الصحي',type:'worker',spec:'صحي وسباكة',desc:'سباكة وصحي وتركيب حمامات.',area:'درعا البلد',exp:'5-10 سنوات',phone:'0945678901',wa:'0945678901',avail:true,verified:false,mine:false,avatar:null,photos:[],reviews:[]},
+  {id:5,name:'مواد البناء الوطني',type:'store',spec:'محل مواد بناء',desc:'جميع مواد البناء مع توصيل مجاني.',area:'شارع الثورة',exp:'أكثر من 15 سنة',phone:'0956789012',wa:'0956789012',avail:true,verified:true,mine:false,avatar:null,photos:[],
+    reviews:[{author:'عميل',stars:4,text:'أسعار معقولة',date:'قبل ٣ أيام'}]},
+  {id:6,name:'م. أحمد الحايك',type:'engineer',spec:'هندسة مدنية',desc:'تصميم منازل وإشراف هندسي.',area:'درعا',exp:'أكثر من 15 سنة',phone:'0967890123',wa:'0967890123',avail:true,verified:true,mine:false,avatar:null,photos:[],
+    reviews:[{author:'أبو سامر',stars:5,text:'مهندس محترف',date:'قبل أسبوعين'}]},
+];
+
+let users=[{phone:ADMIN_PHONE,pass:ADMIN_PASS,name:'الأدمن',type:'admin',userCode:'IBN-00000'}];
+
+// Persistent chats — keyed by proId, stored per session
+let chats={
+  1:{msgs:[{out:false,text:'مرحبا بدي شغل بلاط',time:'10:20',tp:'text'},{out:true,text:'أهلاً كم متر؟',time:'10:21',tp:'text'}]},
+};
+let unread={1:1};
+let myRequests=[];
+let blockedUsers=[];
+let activityLog=[];
+
+const TBG={worker:'#e8f0fe',store:'#d1fae5',engineer:'#ede9fe',contractor:'#fef3c7',client:'#f1f5f9',admin:'#fee2e2'};
+const TCL={worker:'#1a56db',store:'#065f46',engineer:'#5b21b6',contractor:'#92400e',client:'#475569',admin:'#dc2626'};
+const TEM={worker:'🔨',store:'🏪',engineer:'📐',contractor:'🏗️',client:'👤',admin:'⚙️'};
+const TLB={worker:'معلم حرفي',store:'محل مواد بناء',engineer:'مهندس',contractor:'متعهد',client:'عميل',admin:'أدمن'};
+
+/* ══════════ PASSWORD TOGGLE ══════════ */
+const eyeOnSVG=`<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+const eyeOffSVG=`<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+function togglePass(inputId,btnId){
+  const inp=document.getElementById(inputId);
+  const btn=document.getElementById(btnId);
+  if(!inp)return;
+  if(inp.type==='password'){
+    inp.type='text';
+    if(btn)btn.innerHTML=eyeOffSVG;
+  }else{
+    inp.type='password';
+    if(btn)btn.innerHTML=eyeOnSVG;
+  }
+}
+
+/* ══════════ HELPERS ══════════ */
+function nowT(){const d=new Date();return d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes();}
+function uid(){return Date.now()+Math.floor(Math.random()*999);}
+function avgRating(p){if(!p.reviews?.length)return 0;return p.reviews.reduce((s,r)=>s+r.stars,0)/p.reviews.length;}
+function starsHTML(n,sm){return[1,2,3,4,5].map(i=>`<span class="star${sm?' star-sm':''}"${i<=Math.round(n)?' style="color:#f59e0b"':''} style="pointer-events:none;color:${i<=Math.round(n)?'#f59e0b':'#e2e8f0'}">★</span>`).join('');}
+
+/* ══════════ PHOTO HELPERS ══════════ */
+function previewAvatar(inp,targetId){
+  const file=inp.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const el=document.getElementById(targetId);
+    if(!el)return;
+    el.style.backgroundImage=`url(${e.target.result})`;
+    el.style.backgroundSize='cover';
+    el.style.backgroundPosition='center';
+    el.textContent='';
+    if(targetId==='ap-avatar-preview')apAvatarData=e.target.result;
+    if(targetId==='am-avatar-preview')amAvatarData=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+function addPhotos(inp,gridId){
+  const grid=document.getElementById(gridId);if(!grid)return;
+  const existing=grid.querySelectorAll('img').length;
+  const maxNew=50-existing;
+  const files=Array.from(inp.files).slice(0,maxNew);
+  files.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const img=document.createElement('img');
+      img.src=e.target.result;
+      img.className='photo-thumb';
+      img.onclick=()=>viewPhoto(e.target.result);
+      grid.insertBefore(img,grid.querySelector('label'));
+      if(grid.querySelectorAll('img').length>=50)grid.querySelector('label').style.display='none';
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function getPhotosFromGrid(gridId){
+  const grid=document.getElementById(gridId);if(!grid)return[];
+  return Array.from(grid.querySelectorAll('img')).map(img=>img.src);
+}
+function viewPhoto(src){
+  document.getElementById('mo-photo-img').src=src;
+  openModal('mo-photo');
+}
+function canEditPro(){
+  const p=professionals.find(x=>x.id===curPro);
+  if(p&&p.mine)document.getElementById('dt-av-edit-overlay').style.display='flex';
+}
+
+/* ══════════ COLOR THEME ══════════ */
+function setColor(main,dark,light,el){
+  document.documentElement.style.setProperty('--blue',main);
+  document.documentElement.style.setProperty('--blue-dk',dark);
+  document.documentElement.style.setProperty('--blue-lt',light);
+  document.documentElement.style.setProperty('--blue-mid',main);
+  document.getElementById('meta-theme').content=main;
+  document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active'));
+  if(el)el.classList.add('active');
+  localStorage.setItem('ibbni-color',JSON.stringify({main,dark,light}));
+}
+// Load saved color
+try{const c=JSON.parse(localStorage.getItem('ibbni-color'));if(c)setColor(c.main,c.dark,c.light,null);}catch(e){}
+
+/* ══════════ NAV ══════════ */
+function go(id){
+  prevPg=document.querySelector('.page.active')?.id||'pg-home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const fns={
+    'pg-home':renderPros,'pg-browse':renderBrowse,'pg-request':renderRequest,
+    'pg-myprofile':renderMyProfile,'pg-chat':()=>renderChatList(),
+    'pg-newchat':()=>ncSearch(''),
+    'pg-admin':renderAdmin,'pg-addprofile':buildApSpecs,'pg-dashboard':renderDashboard,
+    'pg-addmember':()=>{buildAmSpecs();buildCurSpecs();amAvatarData=null;},
+    'pg-addspec':buildCurSpecs,
+    'pg-settings':()=>{if(curUser)document.getElementById('set-name').value=curUser.name||'';},
+  };
+  if(fns[id])fns[id]();
+  window.scrollTo(0,0);
+}
+function goBack(){go(prevPg);}
+function success(icon,title,msg){
+  document.getElementById('suc-icon').textContent=icon;
+  document.getElementById('suc-title').textContent=title;
+  document.getElementById('suc-msg').textContent=msg;
+  go('pg-success');
+}
+
+/* ══════════ PRO CARD ══════════ */
+function proCard(p){
+  const bg=TBG[p.type]||'#f1f5f9',tc=TCL[p.type]||'#475569',em=TEM[p.type]||'👤';
+  const avg=avgRating(p),cnt=p.reviews?.length||0;
+  const avStyle=p.avatar?`background-image:url(${p.avatar});background-size:cover;background-position:center`:`background:${bg};color:${tc}`;
+  return `<div class="pc" onclick="openDetail(${p.id})">
+    <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:10px">
+      <div class="av" style="width:46px;height:46px;font-size:20px;${avStyle}">${p.avatar?'':em}</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px">
+          <span style="font-weight:800;font-size:15px">${p.name}</span>
+          ${p.verified?`<span class="verified-badge">✓ موثّق</span>`:''}
+          ${p.avail?'<span class="badge b-green">متاح</span>':'<span class="badge b-red">مشغول</span>'}
+        </div>
+        <div style="font-size:13px;color:var(--text2)">${p.spec}</div>
+        <div style="font-size:12px;color:var(--text3)">📍 ${p.area}</div>
+        ${p.userCode?`<div style="font-size:11px;color:var(--blue);font-weight:700">#${p.userCode}</div>`:''}
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        ${avg?`<div style="display:flex;align-items:center;gap:3px"><span style="color:#f59e0b">★</span><span style="font-size:13px;font-weight:700">${avg.toFixed(1)}</span></div><div style="font-size:11px;color:var(--text3)">(${cnt})</div>`:`<div style="font-size:12px;color:var(--text3)">جديد</div>`}
+        <div style="font-size:11px;color:var(--text3);margin-top:3px">${p.exp}</div>
+      </div>
+    </div>
+    ${p.desc?`<p style="font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${p.desc}</p>`:''}
+    ${p.photos?.length?`<div style="display:flex;gap:4px;margin-bottom:10px;overflow:hidden;border-radius:8px">${p.photos.slice(0,3).map(src=>`<img src="${src}" style="width:${100/Math.min(3,p.photos.length)}%;aspect-ratio:1;object-fit:cover">`).join('')}</div>`:''}
+    <div style="display:flex;gap:8px">
+      <button class="btn-call btn-sm" style="flex:1" onclick="event.stopPropagation();location.href='tel:${p.phone}'">📞 اتصل</button>
+      ${p.wa?`<a class="btn-wa btn-sm" style="flex:1" href="https://wa.me/963${p.wa.slice(1)}" onclick="event.stopPropagation()">واتساب</a>`:''}
+      <button class="btn btn-primary btn-sm" style="flex:1;padding:9px" onclick="event.stopPropagation();openChatWith(${p.id})">💬</button>
+    </div>
+  </div>`;
+}
+
+/* ══════════ HOME / BROWSE ══════════ */
+function renderPros(){
+  const el=document.getElementById('pros-list');if(!el)return;
+  const list=professionals.filter(p=>{
+    const f1=!homeFilt||(p.spec.toLowerCase().includes(homeFilt)||p.type===homeFilt);
+    const f2=!homeSearchV||(p.name.includes(homeSearchV)||p.spec.includes(homeSearchV)||p.area.includes(homeSearchV));
+    const f3=!filterCity||p.area===filterCity||p.area?.includes(filterCity)||filterCity==='كل المناطق';
+    const f4=!filterVillage||p.area===filterVillage||p.area?.includes(filterVillage);
+    return f1&&f2&&f3&&f4&&(homeFilt||filterCity?true:p.avail);
+  });
+  const title=document.getElementById('pros-title');
+  if(title){
+    if(filterVillage)title.textContent=filterVillage+' ('+list.length+')';
+    else if(filterCity)title.textContent=filterCity+' ('+list.length+')';
+    else title.textContent=list.length?'متاحون الآن':'لا يوجد';
+  }
+  el.innerHTML=list.length?list.map(proCard).join(''):`<div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">لا نتائج</div><div style="font-size:13px;color:var(--text3);margin-top:4px">جرّب منطقة أخرى</div></div>`;
+}
+function homeSearch(v){homeSearchV=v;renderPros();}
+function filterChip(v,el){
+  homeFilt=v;
+  document.querySelectorAll('#home-chips .spec-chip').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');renderPros();
+}
+let brType='all',brText='';
+function renderBrowse(){
+  const list=professionals.filter(p=>{
+    const t=brType==='all'||p.type===brType;
+    const tx=!brText||(p.name.includes(brText)||p.spec.includes(brText)||p.area.includes(brText));
+    const tc=!brFilterCity||p.area===brFilterCity||p.area?.includes(brFilterCity);
+    const tv=!brFilterVillage||p.area===brFilterVillage||p.area?.includes(brFilterVillage);
+    return t&&tx&&tc&&tv;
+  });
+  const el=document.getElementById('br-list');
+  if(el)el.innerHTML=list.length?list.map(proCard).join(''):`<div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">لا نتائج</div><div style="font-size:13px;color:var(--text3);margin-top:4px">جرّب منطقة أخرى</div></div>`;
+}
+function browseFilter(v){brText=v;renderBrowse();}
+function brTab(t,el){brType=t;document.querySelectorAll('#pg-browse .tab').forEach(b=>b.classList.remove('on'));el.classList.add('on');renderBrowse();}
+
+/* ══════════ DETAIL ══════════ */
+function openDetail(id){
+  const p=professionals.find(x=>x.id==id);if(!p)return;
+  curPro=id;
+  const avg=avgRating(p),cnt=p.reviews?.length||0;
+  const avEl=document.getElementById('dt-av');
+  if(p.avatar){avEl.style.backgroundImage=`url(${p.avatar})`;avEl.style.backgroundSize='cover';avEl.style.backgroundPosition='center';avEl.textContent='';}
+  else{avEl.style.backgroundImage='';avEl.style.background='rgba(255,255,255,.18)';avEl.style.color='#fff';avEl.textContent=TEM[p.type]||'👤';}
+  document.getElementById('dt-name').textContent=p.name;
+  document.getElementById('dt-role').textContent=p.spec;
+  document.getElementById('dt-rating').textContent=avg?avg.toFixed(1)+' ⭐':'—';
+  document.getElementById('dt-reviews-count').textContent=cnt;
+  document.getElementById('dt-exp').textContent=p.exp;
+  let badges=p.avail?'<span class="badge b-green">✅ متاح الآن</span>':'<span class="badge b-red">مشغول</span>';
+  if(p.verified)badges+=`<span class="badge b-blue">✓ موثّق</span>`;
+  document.getElementById('dt-badges').innerHTML=badges;
+  // Rating bars
+  if(avg&&cnt>0){
+    const counts=[5,4,3,2,1].map(s=>({s,c:p.reviews.filter(r=>r.stars===s).length}));
+    document.getElementById('dt-rating-bars').innerHTML=`<div class="card" style="margin-bottom:0"><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px"><div style="font-size:36px;font-weight:900;color:var(--blue);line-height:1">${avg.toFixed(1)}</div><div><div class="stars">${starsHTML(avg)}</div><div style="font-size:12px;color:var(--text3)">${cnt} تقييم</div></div></div>${counts.map(({s,c})=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span style="font-size:12px;color:var(--text2);min-width:14px">${s}</span><span style="color:#f59e0b;font-size:13px">★</span><div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:${cnt?Math.round(c/cnt*100):0}%"></div></div><span style="font-size:12px;color:var(--text3);min-width:18px;text-align:left">${c}</span></div>`).join('')}</div>`;
+  }else document.getElementById('dt-rating-bars').innerHTML='';
+  // Photos
+  const ps=document.getElementById('dt-photos-section');
+  if(p.photos?.length){
+    ps.innerHTML=`<div class="sh"><span class="st">صور الأعمال (${p.photos.length})</span></div><div class="photo-grid" style="margin-bottom:16px">${p.photos.map(src=>`<img src="${src}" class="photo-thumb" onclick="viewPhoto('${src}')">`).join('')}</div>`;
+  }else ps.innerHTML='';
+  document.getElementById('dt-desc').textContent=p.desc||'لا يوجد وصف';
+  document.getElementById('dt-area').textContent='📍 '+p.area;
+  document.getElementById('dt-call').href='tel:'+p.phone;
+  const waEl=document.getElementById('dt-wa');
+  if(p.wa){waEl.href=`https://wa.me/963${p.wa.slice(1)}`;waEl.style.display='flex';}else waEl.style.display='none';
+  renderDetailReviews(p);
+  // Show edit overlay if own profile
+  document.getElementById('dt-av-edit-overlay').style.display=p.mine?'flex':'none';
+  go('pg-detail');
+}
+function renderDetailReviews(p){
+  const el=document.getElementById('dt-reviews-list');
+  if(!el)return;
+  const revs=p.reviews||[];
+  if(!revs.length){
+    el.innerHTML=`<div class="empty" style="padding:20px 0"><div class="empty-icon" style="font-size:36px">💬</div><div class="empty-sub">لا توجد تقييمات بعد</div></div>`;
+  } else {
+    el.innerHTML=revs.map((r,idx)=>{
+      const isOwn=curUser&&r.author===curUser.name;
+      const isAdmin=curType==='admin';
+      const actions=(isOwn||isAdmin)?`<div style="display:flex;gap:6px;margin-top:8px">
+        ${isOwn?`<button onclick="editReview(${p.id},${idx})" style="background:var(--blue-lt);color:var(--blue);border:none;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;cursor:pointer;font-family:Tajawal,sans-serif">تعديل</button>`:''}
+        <button onclick="deleteReview(${p.id},${idx})" style="background:#fee2e2;color:var(--red);border:none;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;cursor:pointer;font-family:Tajawal,sans-serif">حذف</button>
+      </div>`:'';
+      return `<div class="rev-card" id="rev-${p.id}-${idx}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+          <span style="font-weight:700;font-size:14px">${r.author}</span>
+          <div class="stars">${starsHTML(r.stars,true)}</div>
+        </div>
+        ${r.text?`<div style="font-size:13px;color:var(--text2);margin-top:4px;line-height:1.6">${r.text}</div>`:''}
+        <div style="font-size:11px;color:var(--text3);margin-top:4px">${r.date}</div>
+        ${actions}
+      </div>`;
+    }).join('');
+  }
+  const fa=document.getElementById('review-form-area');
+  if(curUser){
+    fa.innerHTML=`<button class="btn btn-primary" onclick="openReviewModal(${p.id})" style="margin-top:8px">⭐ أضف تقييمك</button>`;
+  }else{
+    fa.innerHTML=`<div style="text-align:center;padding:14px;background:var(--gray);border-radius:var(--rsm);margin-top:8px;font-size:13px;color:var(--text2)">سجّل لإضافة تقييم <button onclick="go('pg-auth')" style="background:none;border:none;color:var(--blue);font-weight:700;cursor:pointer;font-size:13px">سجّل الآن</button></div>`;
+  }
+}
+function deleteReview(proId,idx){
+  if(!confirm('هل تريد حذف هذا التعليق؟'))return;
+  const p=professionals.find(x=>x.id==proId);
+  if(!p||!p.reviews)return;
+  p.reviews.splice(idx,1);
+  openDetail(proId);
+}
+function editReview(proId,idx){
+  const p=professionals.find(x=>x.id==proId);
+  if(!p||!p.reviews)return;
+  const r=p.reviews[idx];
+  revProId=proId;
+  selStar=r.stars;
+  document.getElementById('rev-pro-name').textContent=p.name;
+  document.querySelectorAll('#rev-stars .star').forEach((s,i)=>s.style.color=i<r.stars?'#f59e0b':'#e2e8f0');
+  document.getElementById('rev-text').value=r.text||'';
+  window._editRevIdx=idx;
+  openModal('mo-review');
+}
+function openReviewModal(proId){
+  revProId=proId;selStar=0;
+  window._editRevIdx=null;
+  const p=professionals.find(x=>x.id===proId);
+  document.getElementById('rev-pro-name').textContent=p?.name||'';
+  document.querySelectorAll('#rev-stars .star').forEach(s=>s.style.color='#e2e8f0');
+  document.getElementById('rev-text').value='';
+  openModal('mo-review');
+}
+function setStar(n){
+  selStar=n;
+  document.querySelectorAll('#rev-stars .star').forEach((s,i)=>s.style.color=i<n?'#f59e0b':'#e2e8f0');
+}
+function submitReview(){
+  if(!selStar){alert('يرجى اختيار عدد النجوم');return;}
+  const p=professionals.find(x=>x.id==revProId);
+  if(!p)return;
+  if(!p.reviews)p.reviews=[];
+  const editIdx=window._editRevIdx;
+  if(editIdx!==undefined&&editIdx!==null){
+    // Edit existing
+    p.reviews[editIdx]={...p.reviews[editIdx],stars:selStar,text:document.getElementById('rev-text').value.trim(),date:'تم التعديل'};
+    window._editRevIdx=null;
+  } else {
+    // New review
+    p.reviews.unshift({author:curUser?.name||'مستخدم',stars:selStar,text:document.getElementById('rev-text').value.trim(),date:'الآن'});
+  }
+  closeModal('mo-review');
+  openDetail(revProId);
+}
+
+/* ══════════ USER CODE ══════════ */
+function genUserCode(){
+  // أخذ أعلى رقم موجود وزيد عليه
+  const nums=users
+    .map(u=>u.userCode)
+    .filter(Boolean)
+    .map(c=>parseInt(c.replace('IBN-',''))||0);
+  const next=(nums.length?Math.max(...nums):0)+1;
+  return 'IBN-'+String(next).padStart(5,'0');
+}
+
+/* ══════════ AUTH ══════════ */
+function authTab(t){
+  document.getElementById('auth-ph-f').style.display=t==='phone'?'block':'none';
+  document.getElementById('auth-em-f').style.display=t==='email'?'block':'none';
+  document.getElementById('tab-ph').classList.toggle('on',t==='phone');
+  document.getElementById('tab-em').classList.toggle('on',t==='email');
+}
+function doAuth(){
+  const ph=document.getElementById('a-phone').value.trim();
+  const em=document.getElementById('a-email').value.trim();
+  const pass=document.getElementById('a-pass').value;
+  const pass2=document.getElementById('a-pass2').value;
+  const id=document.getElementById('auth-em-f').style.display==='none'?ph:em;
+  if(!id){alert('يرجى إدخال رقم الهاتف أو البريد');return;}
+  if(pass.length<6){alert('كلمة المرور ٦ أحرف على الأقل');return;}
+  if(pass!==pass2){alert('كلمتا المرور غير متطابقتين');return;}
+  if(users.find(u=>u.phone===ph||u.email===em)){alert('هذا الحساب موجود. يرجى تسجيل الدخول.');return;}
+  const newUser={phone:ph,email:em,pass,name:'مستخدم عُمران',userCode:genUserCode()};
+  users.push(newUser);
+  curUser=newUser;
+  activityLog.unshift({type:'register',icon:'👤',text:`تسجيل مستخدم جديد: ${ph||em}`,time:new Date().toLocaleString('ar-SY'),color:'#1a56db'});
+  go('pg-choosetype');
+}
+function doLogin(){
+  const id=document.getElementById('l-id').value.trim();
+  const pass=document.getElementById('l-pass').value;
+  if(!id||!pass){alert('يرجى إدخال بيانات الدخول');return;}
+  const u=users.find(x=>(x.phone===id||x.email===id)&&x.pass===pass);
+  if(!u){alert('بيانات الدخول غير صحيحة');return;}
+  curUser=u;
+  activityLog.unshift({type:'login',icon:'🔑',text:`دخول: ${id}`,time:new Date().toLocaleString('ar-SY'),color:'#22c55e'});
+  if(u.type==='admin'){curType='admin';activateUser();}
+  else if(u.type){curType=u.type;activateUser();}
+  else go('pg-choosetype');
+}
+function selType(t,el){
+  selTypeVal=t;
+  document.querySelectorAll('.tyb').forEach(b=>{b.classList.remove('on');b.querySelector('.chk').textContent='';});
+  el.classList.add('on');el.querySelector('.chk').textContent='✓';
+  const btn=document.getElementById('confirm-type');btn.disabled=false;btn.style.opacity='1';
+}
+function confirmType(){
+  if(!selTypeVal)return;
+  curType=selTypeVal;
+  if(curUser){curUser.type=curType;const u=users.find(x=>x.phone===curUser.phone);if(u)u.type=curType;}
+  activateUser();
+}
+function activateUser(){
+  document.getElementById('top-auth').style.display='none';
+  document.getElementById('top-me').style.display='';
+  document.getElementById('hero-out').style.display='none';
+  document.getElementById('hero-in').style.display='flex';
+  document.getElementById('chat-dot').style.display='';
+  document.getElementById('nav-badge').style.display='flex';
+  if(curType==='admin')document.getElementById('top-admin').style.display='';
+  // عرض رقم العميل
+  const codeEl=document.getElementById('top-code');
+  if(codeEl&&curUser?.userCode){codeEl.textContent='#'+curUser.userCode;codeEl.style.display='';}
+  updateTopAvatar();
+  if(curType!=='client'&&curType!=='admin')go('pg-addprofile');
+  else success('🎉','مرحباً في عُمران!','حسابك جاهز. يمكنك الآن الاستخدام.');
+}
+function updateTopAvatar(){
+  const el=document.getElementById('top-av');
+  if(!el)return;
+  const myP=professionals.find(p=>p.mine&&p.avatar);
+  if(myP){el.style.backgroundImage=`url(${myP.avatar})`;el.style.backgroundSize='cover';el.style.backgroundPosition='center';el.textContent='';}
+  else{el.style.backgroundImage='';el.textContent=TEM[curType]||'👤';}
+}
+function logout(){
+  curUser=null;curType=null;selTypeVal=null;
+  document.getElementById('top-auth').style.display='';
+  document.getElementById('top-me').style.display='none';
+  document.getElementById('top-admin').style.display='none';
+  document.getElementById('top-code').style.display='none';
+  document.getElementById('hero-out').style.display='block';
+  document.getElementById('hero-in').style.display='none';
+  document.getElementById('chat-dot').style.display='none';
+  document.getElementById('nav-badge').style.display='none';
+  go('pg-home');
+}
+
+/* ══════════ SETTINGS ══════════ */
+function saveName(){
+  const n=document.getElementById('set-name').value.trim();
+  if(!n){alert('يرجى إدخال الاسم');return;}
+  curUser.name=n;
+  const u=users.find(x=>x.phone===curUser.phone||x.email===curUser.email);
+  if(u)u.name=n;
+  success('✅','تم تغيير الاسم!','اسمك الجديد: '+n);
+}
+function savePass(){
+  const old=document.getElementById('set-old-pass').value;
+  const n=document.getElementById('set-new-pass').value;
+  const n2=document.getElementById('set-new-pass2').value;
+  if(!old||!n||!n2){alert('يرجى ملء جميع الحقول');return;}
+  if(old!==curUser.pass){alert('كلمة المرور الحالية غير صحيحة');return;}
+  if(n.length<6){alert('كلمة المرور الجديدة ٦ أحرف على الأقل');return;}
+  if(n!==n2){alert('كلمتا المرور غير متطابقتين');return;}
+  curUser.pass=n;
+  const u=users.find(x=>x.phone===curUser.phone||x.email===curUser.email);
+  if(u)u.pass=n;
+  document.getElementById('set-old-pass').value='';
+  document.getElementById('set-new-pass').value='';
+  document.getElementById('set-new-pass2').value='';
+  success('🔑','تم تغيير كلمة المرور!','كلمة مرورك الجديدة فعّالة الآن.');
+}
+
+/* ══════════ SPECS ══════════ */
+function buildSpecGrid(cid,fn){
+  const el=document.getElementById(cid);if(!el)return;
+  el.innerHTML=specialties.map(s=>`<button class="sb" onclick="${fn}('${s.id}',this)">${s.icon} ${s.id}</button>`).join('');
+}
+function buildApSpecs(){apSpecVal=null;apAvatarData=null;buildSpecGrid('ap-specs','apSpec');if(curUser?.phone)document.getElementById('ap-phone').value=curUser.phone;}
+function apSpec(v,el){apSpecVal=v;document.querySelectorAll('#ap-specs .sb').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+function buildAmSpecs(){amSpecVal=null;buildSpecGrid('am-specs','amSpec');}
+function amSpec(v,el){amSpecVal=v;document.querySelectorAll('#am-specs .sb').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+function buildCurSpecs(){
+  const el=document.getElementById('cur-specs');
+  if(el)el.innerHTML=specialties.map(s=>`<span class="badge b-blue" style="margin:2px">${s.icon} ${s.id}</span>`).join('');
+}
+function togAvail(){availOn=!availOn;document.getElementById('avail-track').className='tog-track'+(availOn?' on':'');}
+function togAm(){amAvailOn=!amAvailOn;document.getElementById('am-avail-track').className='tog-track'+(amAvailOn?' on':'');}
+
+/* ══════════ ADD PROFILE ══════════ */
+function savePro(){
+  const name=document.getElementById('ap-name').value.trim();
+  const desc=document.getElementById('ap-desc').value.trim();
+  const exp=document.getElementById('ap-exp').value;
+  const area=document.getElementById('ap-area').value.trim();
+  const phone=document.getElementById('ap-phone').value.trim();
+  const wa=document.getElementById('ap-wa').value.trim();
+  if(!name){alert('يرجى إدخال الاسم');return;}
+  if(!apSpecVal){alert('يرجى اختيار نوع العمل');return;}
+  if(!exp){alert('يرجى اختيار سنوات الخبرة');return;}
+  if(!area){alert('يرجى إدخال المنطقة');return;}
+  if(!phone){alert('يرجى إدخال رقم الهاتف');return;}
+  const sp=specialties.find(s=>s.id===apSpecVal);
+  const photos=getPhotosFromGrid('ap-photos-grid');
+  professionals.unshift({id:uid(),name,type:sp?.type||curType||'worker',spec:apSpecVal,desc,area,exp,phone,wa,avail:availOn,verified:false,mine:true,avatar:apAvatarData,photos,reviews:[]});
+  if(curUser)curUser.name=name;
+  updateTopAvatar();
+  success('🚀','تم نشر ملفك!','ملفك الآن ظاهر للعملاء.');
+}
+
+/* ══════════ REQUEST ══════════ */
+let reqSpec='';
+function renderRequest(){
+  const el=document.getElementById('req-content');if(!el)return;
+  if(!curUser){
+    el.innerHTML=`<div class="empty"><div class="empty-icon">🔐</div><div class="empty-text">سجّل أولاً</div><div class="empty-sub" style="margin-bottom:18px">يجب التسجيل لإرسال طلب</div><button class="btn btn-primary" onclick="go('pg-auth')">سجّل مجاناً</button></div>`;
+    return;
+  }
+  const chips=specialties.map(s=>`<button class="sb" onclick="pickReqSpec('${s.id}',this)">${s.icon} ${s.id}</button>`).join('');
+  el.innerHTML=`<p style="color:var(--text2);margin-bottom:16px;font-size:14px">سيتواصل معك المعلم خلال دقائق</p>
+    <div class="fg"><label class="fl">نوع العمل</label><div class="sg" id="req-specs">${chips}</div></div>
+    <div class="fg"><label class="fl">الموقع</label><input class="fi" id="req-loc" placeholder="مثال: درعا البلد..."></div>
+    <div class="fg"><label class="fl">تفاصيل العمل</label><textarea class="fi" id="req-det" placeholder="اكتب ما تحتاجه..."></textarea></div>
+    <div class="fg"><label class="fl">رقم التواصل</label><input class="fi" id="req-ph" value="${curUser.phone||''}" placeholder="09XXXXXXXX" style="direction:ltr"></div>
+    <button class="btn btn-primary" onclick="submitReq()">إرسال الطلب ⚡</button>`;
+}
+function pickReqSpec(v,el){reqSpec=v;document.querySelectorAll('#req-specs .sb').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+function submitReq(){
+  if(!document.getElementById('req-loc')?.value.trim()){alert('يرجى إدخال الموقع');return;}
+  myRequests.push({
+    id: Date.now(),
+    spec: reqSpec||'عام',
+    area: document.getElementById('req-loc').value.trim(),
+    det: document.getElementById('req-det')?.value.trim()||'',
+    phone: document.getElementById('req-ph')?.value.trim()||curUser?.phone||'',
+    clientName: curUser?.name||'مستخدم',
+    clientCode: curUser?.userCode||'—',
+    date: new Date().toLocaleDateString('ar-SY')+' '+nowT(),
+    status:'new'
+  });
+  activityLog.unshift({type:'request',icon:'📨',text:`طلب جديد: ${reqSpec||'عام'} في ${document.getElementById('req-loc')?.value||''}`,time:new Date().toLocaleString('ar-SY'),color:'#f59e0b'});
+  success('✅','تم إرسال طلبك!','سيتواصل معك المعلم المناسب خلال دقائق.');
+}
+
+/* ══════════ CHAT ══════════ */
+function renderChatList(filter){
+  const el=document.getElementById('chat-list');if(!el)return;
+  let keys=Object.keys(chats).map(Number);
+  if(filter&&filter!=='all')keys=keys.filter(id=>{const p=professionals.find(x=>x.id===id);return p&&p.type===filter;});
+  if(!keys.length){el.innerHTML=`<div class="empty"><div class="empty-icon">💬</div><div class="empty-text">لا توجد محادثات</div><div class="empty-sub">ابدأ من صفحة التصفح</div></div>`;return;}
+  el.innerHTML=keys.map(id=>{
+    const p=professionals.find(x=>x.id===id);if(!p)return '';
+    const last=chats[id].msgs.slice(-1)[0];
+    const preview=last?(last.tp==='voice'?'🎤 رسالة صوتية':last.text):'';
+    const u=unread[id]||0;
+    const avStyle=p.avatar?`background-image:url(${p.avatar});background-size:cover;background-position:center`:`background:${TBG[p.type]};color:${TCL[p.type]}`;
+    return `<div class="ci" onclick="openChatWith(${p.id})">
+      <div class="av" style="width:46px;height:46px;font-size:19px;${avStyle}">${p.avatar?'':TEM[p.type]||'👤'}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;font-size:15px">${p.name} ${p.verified?'<span style="color:var(--blue);font-size:12px">✓</span>':''}</div>
+        <div style="font-size:13px;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px">${preview}</div>
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:11px;color:var(--text3)">${last?.time||''}</div>
+        ${u?`<div style="background:var(--red);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;margin-top:4px;margin-right:auto">${u}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+function cTab(t,el){document.querySelectorAll('#pg-chat .tab').forEach(b=>b.classList.remove('on'));el.classList.add('on');renderChatList(t);}
+function openChatWith(id){
+  const p=professionals.find(x=>x.id===id);if(!p)return;
+  curChatId=id;unread[id]=0;
+  if(!chats[id])chats[id]={msgs:[]};
+  const avStyle=p.avatar?`background-image:url(${p.avatar});background-size:cover;background-position:center`:`background:${TBG[p.type]};color:${TCL[p.type]}`;
+  const av=document.getElementById('cw-av');
+  av.style.cssText=`width:38px;height:38px;font-size:16px;${avStyle}`;
+  av.textContent=p.avatar?'':TEM[p.type]||'👤';
+  document.getElementById('cw-dot').style.background=p.avail?'#22c55e':'#94a3b8';
+  document.getElementById('cw-name').textContent=p.name;
+  document.getElementById('cw-status').textContent=p.avail?'متصل الآن':'غير متصل';
+  document.getElementById('cw-call').href='tel:'+p.phone;
+  document.getElementById('cw-wa').href=p.wa?`https://wa.me/963${p.wa.slice(1)}`:'#';
+  renderMsgs();go('pg-chatwin');
+}
+const WVH=[8,14,20,14,24,12,18,22,10,16,20,14,8,18,22];
+function renderMsgs(){
+  const el=document.getElementById('cw-msgs');if(!el||!curChatId)return;
+  el.innerHTML=(chats[curChatId]?.msgs||[]).map(m=>{
+    const cls=m.out?'out':'in';
+    if(m.tp==='voice'){
+      return `<div class="bbl ${cls}"><div class="vb"><button class="pb" onclick="playV(this)">▶</button><div class="wv">${WVH.map(h=>`<span style="height:${h}px"></span>`).join('')}</div><span style="font-size:11px;opacity:.6">${m.dur}</span></div><div class="bt">${m.time}${m.out?' ✓✓':''}</div></div>`;
+    }
+    return `<div class="bbl ${cls}">${m.text}<div class="bt">${m.time}${m.out?' ✓✓':''}</div></div>`;
+  }).join('');
+  el.scrollTop=el.scrollHeight;
+}
+function sendMsg(){
+  const inp=document.getElementById('msg-inp');const txt=inp.value.trim();
+  if(!txt||!curChatId)return;
+  chats[curChatId].msgs.push({out:true,text:txt,time:nowT(),tp:'text'});
+  inp.value='';inp.style.height='auto';renderMsgs();
+  setTimeout(()=>{
+    const rep=['تمام شكراً!','رح نرتب الموضوع','مفهوم سأتواصل','أهلاً سأكون عندك'][Math.floor(Math.random()*4)];
+    chats[curChatId].msgs.push({out:false,text:rep,time:nowT(),tp:'text'});
+    renderMsgs();
+  },1400);
+}
+function toggleRec(){
+  if(!curChatId)return;
+  if(!isRec){
+    isRec=true;recSecs=0;
+    document.getElementById('rec-btn').classList.add('on');document.getElementById('rec-btn').textContent='⏹';
+    document.getElementById('rec-bar').classList.add('show');
+    recInt=setInterval(()=>{recSecs++;const m=Math.floor(recSecs/60),s=recSecs%60;document.getElementById('rec-timer').textContent=m+':'+(s<10?'0':'')+s;},1000);
+  }else finishRec();
+}
+function finishRec(){
+  isRec=false;clearInterval(recInt);
+  document.getElementById('rec-btn').classList.remove('on');document.getElementById('rec-btn').textContent='🎤';
+  document.getElementById('rec-bar').classList.remove('show');
+  if(recSecs>=1){const dur=Math.floor(recSecs/60)+':'+(recSecs%60<10?'0':'')+recSecs%60;chats[curChatId].msgs.push({out:true,text:'',time:nowT(),tp:'voice',dur});renderMsgs();}
+}
+function cancelRec(){isRec=false;clearInterval(recInt);document.getElementById('rec-btn').classList.remove('on');document.getElementById('rec-btn').textContent='🎤';document.getElementById('rec-bar').classList.remove('show');}
+function playV(btn){if(playBtn&&playBtn!==btn)playBtn.textContent='▶';btn.textContent=btn.textContent==='▶'?'⏸':'▶';if(btn.textContent==='⏸'){playBtn=btn;setTimeout(()=>{btn.textContent='▶';if(playBtn===btn)playBtn=null;},3000);}else playBtn=null;}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,90)+'px';}
+function ncSearch(v){
+  const el=document.getElementById('nc-list');if(!el)return;
+  const list=professionals.filter(p=>!v||(p.name.includes(v)||p.spec.includes(v)));
+  el.innerHTML=list.map(p=>`<div class="ci" onclick="openChatWith(${p.id})">
+    <div class="av" style="width:46px;height:46px;font-size:19px;background:${TBG[p.type]};color:${TCL[p.type]}">${TEM[p.type]||'👤'}</div>
+    <div style="flex:1"><div style="font-weight:700">${p.name}</div><div style="font-size:13px;color:var(--text2)">${p.spec} · ${p.area}</div></div>
+    ${p.avail?'<span class="badge b-green">متاح</span>':''}
+  </div>`).join('');
+}
+
+/* ══════════ MY PROFILE ══════════ */
+function renderMyProfile(){
+  const el=document.getElementById('myprofile');if(!el)return;
+  if(!curUser){
+    el.innerHTML=`<div class="empty" style="padding:60px 20px"><div class="empty-icon" style="font-size:60px">👤</div><div class="empty-text">أنت غير مسجّل</div><div class="empty-sub" style="margin-bottom:20px">سجّل للوصول لحسابك</div><button class="btn btn-primary" onclick="go('pg-auth')" style="max-width:260px;margin:0 auto">سجّل مجاناً ⚡</button></div>`;
+    return;
+  }
+  const myPs=professionals.filter(p=>p.mine);
+  const te=TEM[curType]||'👤';
+  const myAvatar=myPs.find(p=>p.avatar)?.avatar;
+  el.innerHTML=`
+    <div class="ph">
+      <div style="position:relative;display:inline-block">
+        <div class="av" style="width:74px;height:74px;font-size:30px;margin:0 auto;${myAvatar?`background-image:url(${myAvatar});background-size:cover;background-position:center`:'background:rgba(255,255,255,.18);color:#fff'}">${myAvatar?'':te}</div>
+      </div>
+      <div class="pn">${curUser.name||'مستخدم عُمران'}</div>
+      <div class="pr">${TLB[curType]||'مستخدم'}</div>
+      ${curUser.userCode?`<div style="margin-top:6px"><span style="background:rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px">#${curUser.userCode}</span></div>`:''}
+    </div>
+    <div class="sr">
+      <div class="sb3"><div class="sn">${myPs.length}</div><div class="slb">ملفاتي</div></div>
+      <div class="sb3"><div class="sn">${Object.keys(chats).length}</div><div class="slb">محادثة</div></div>
+      <div class="sb3"><div class="sn">${myRequests.length}</div><div class="slb">طلب</div></div>
+    </div>
+    <div style="padding:16px">
+      <button class="btn btn-primary" onclick="go('pg-addprofile')" style="margin-bottom:8px">+ أضف ملفاً مهنياً</button>
+      <button class="btn btn-secondary" onclick="go('pg-settings')" style="margin-bottom:16px">⚙️ الإعدادات وتغيير كلمة المرور</button>
+      ${myPs.length?`<div class="sh"><span class="st">ملفاتي</span></div>${myPs.map(p=>`<div class="card" style="display:flex;gap:12px;align-items:center;cursor:pointer" onclick="openDetail(${p.id})">
+        <div class="av" style="width:42px;height:42px;font-size:18px;${p.avatar?`background-image:url(${p.avatar});background-size:cover;background-position:center`:`background:${TBG[p.type]};color:${TCL[p.type]}`}">${p.avatar?'':te}</div>
+        <div style="flex:1"><div style="font-weight:700">${p.name}</div><div style="font-size:13px;color:var(--text2)">${p.spec}</div></div>
+        ${p.avail?'<span class="badge b-green">متاح</span>':'<span class="badge b-red">مشغول</span>'}
+      </div>`).join('')}`:''}
+      <button onclick="logout()" style="width:100%;margin-top:20px;background:#fff;color:var(--red);border:1.5px solid #fecaca;border-radius:var(--rsm);padding:12px;font-size:14px;font-weight:700;cursor:pointer">تسجيل خروج</button>
+    </div>`;
+}
+
+/* ══════════ ADMIN ══════════ */
+function renderAdmin(){
+  if(curType!=='admin'){go('pg-home');return;}
+  const el=document.getElementById('admin-content');if(!el)return;
+  const avgAll=professionals.filter(p=>p.reviews?.length).reduce((s,p,_,a)=>s+avgRating(p)/a.length,0);
+  el.innerHTML=`
+    <button class="btn btn-primary" onclick="go('pg-dashboard')" style="margin-bottom:12px;background:linear-gradient(135deg,#1a56db,#7c3aed)">📊 داشبورد التحليلات ←</button>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+      <div class="stat-card"><div style="font-size:28px;font-weight:900;color:var(--blue)">${professionals.length}</div><div style="font-size:13px;color:var(--text2)">مسجّل</div></div>
+      <div class="stat-card" style="background:#f0fdf4"><div style="font-size:28px;font-weight:900;color:var(--green)">${professionals.filter(p=>p.avail).length}</div><div style="font-size:13px;color:var(--text2)">متاح</div></div>
+      <div class="stat-card" style="background:#fef3c7"><div style="font-size:28px;font-weight:900;color:#92400e">${specialties.length}</div><div style="font-size:13px;color:var(--text2)">مهنة</div></div>
+      <div class="stat-card" style="background:#f3e8ff"><div style="font-size:28px;font-weight:900;color:var(--purple)">${avgAll?avgAll.toFixed(1)+' ⭐':'—'}</div><div style="font-size:13px;color:var(--text2)">متوسط تقييم</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+      <button class="btn btn-primary btn-sm" onclick="go('pg-addmember')">➕ إضافة شخص</button>
+      <button class="btn btn-secondary btn-sm" onclick="go('pg-addspec')">🏷️ مهنة جديدة</button>
+      <button class="btn btn-secondary btn-sm" onclick="openAppSettings()" style="grid-column:span 2">📱 إعدادات التطبيق (هاتف، إيميل، واتساب)</button>
+      <button class="btn btn-secondary btn-sm" onclick="go('pg-settings')" style="grid-column:span 2">🔑 إعدادات الأدمن (اسم وكلمة مرور)</button>
+    </div>
+    <div class="sh"><span class="st">المسجّلون (${professionals.length})</span></div>
+    ${professionals.map(p=>{
+      const avg=avgRating(p),cnt=p.reviews?.length||0;
+      const avStyle=p.avatar?`background-image:url(${p.avatar});background-size:cover;background-position:center`:`background:${TBG[p.type]};color:${TCL[p.type]}`;
+      return `<div class="admin-row">
+        <div class="av" style="width:40px;height:40px;font-size:17px;${avStyle}">${p.avatar?'':TEM[p.type]||'👤'}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">${p.name} ${p.verified?'<span style="color:var(--blue);font-size:12px">✓</span>':''}</div>
+          <div style="font-size:12px;color:var(--text2)">${p.spec} · ${p.area}</div>
+          ${p.userCode?`<div style="font-size:11px;color:var(--blue);font-weight:700">#${p.userCode}</div>`:''}
+          ${avg?`<div style="font-size:11px;color:#f59e0b">★ ${avg.toFixed(1)} (${cnt})</div>`:''}
+        </div>
+        ${p.avail?'<span class="badge b-green" style="font-size:11px">متاح</span>':'<span class="badge b-red" style="font-size:11px">مشغول</span>'}
+        <div style="display:flex;gap:4px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end">
+          <button onclick="openEditPro(${p.id})" style="background:#fef3c7;color:#92400e;border:none;border-radius:6px;padding:5px 7px;cursor:pointer;font-size:11px;font-weight:700">✏️ تعديل</button>
+          <button onclick="toggleProAvail(${p.id})" style="background:var(--gray);border:none;border-radius:6px;padding:5px 7px;cursor:pointer;font-size:11px;font-weight:700">${p.avail?'إيقاف':'تفعيل'}</button>
+          <button onclick="toggleVerified(${p.id})" style="background:var(--blue-lt);color:var(--blue);border:none;border-radius:6px;padding:5px 7px;cursor:pointer;font-size:11px;font-weight:700">${p.verified?'إلغاء توثيق':'توثيق'}</button>
+          <button onclick="deletePro(${p.id})" style="background:#fee2e2;color:var(--red);border:none;border-radius:6px;padding:5px 7px;cursor:pointer;font-size:11px;font-weight:700">حذف</button>
+        </div>
+      </div>`;
+    }).join('')}`;
+}
+/* ══════════ DASHBOARD ══════════ */
+function renderDashboard(){
+  if(curType!=='admin'){go('pg-home');return;}
+  const el=document.getElementById('dashboard-content');
+  if(!el)return;
+  el.innerHTML='<div class="dash-spin"></div>';
+
+  // ═══ حساب كل البيانات ═══
+  const total=professionals.length;
+  const avail=professionals.filter(p=>p.avail).length;
+  const busy=total-avail;
+  const verified=professionals.filter(p=>p.verified).length;
+  const allRevs=professionals.flatMap(p=>p.reviews||[]);
+  const totalRevs=allRevs.length;
+  const avgAll=allRevs.length?allRevs.reduce((s,r)=>s+r.stars,0)/allRevs.length:0;
+  const totalReqs=typeof requests!=='undefined'?requests.length:0;
+  const newReqs=typeof requests!=='undefined'?requests.filter(r=>r.status==='new').length:0;
+
+  // توزيع النوع
+  const byType={};
+  professionals.forEach(p=>{byType[p.type]=(byType[p.type]||0)+1;});
+  const typeColors={worker:'#1a56db',store:'#22c55e',engineer:'#7c3aed',contractor:'#f59e0b'};
+  const typeLabels={worker:'معلمون',store:'محلات',engineer:'مهندسون',contractor:'متعهدون'};
+  const typeMax=Math.max(...Object.values(byType),1);
+
+  // أكثر المهن
+  const bySpec={};
+  professionals.forEach(p=>{bySpec[p.spec]=(bySpec[p.spec]||0)+1;});
+  const topSpecs=Object.entries(bySpec).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const specMax=topSpecs[0]?.[1]||1;
+
+  // توزيع المنطقة
+  const byArea={};
+  professionals.forEach(p=>{if(p.area)byArea[p.area]=(byArea[p.area]||0)+1;});
+  const topAreas=Object.entries(byArea).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const areaMax=topAreas[0]?.[1]||1;
+
+  // توزيع النجوم
+  const byStar={5:0,4:0,3:0,2:0,1:0};
+  allRevs.forEach(r=>{if(byStar[r.stars]!==undefined)byStar[r.stars]++;});
+
+  // أعلى تقييماً
+  const topRated=[...professionals].filter(p=>p.reviews?.length).sort((a,b)=>avgRating(b)-avgRating(a)).slice(0,5);
+  const medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
+  const clrs=['#1a56db','#22c55e','#7c3aed','#f59e0b','#ef4444'];
+  const starClrs={5:'#f59e0b',4:'#22c55e',3:'#1a56db',2:'#7c3aed',1:'#ef4444'};
+
+  // SVG دائرة الإتاحة
+  const pct=total?Math.round(avail/total*100):0;
+  const circ=2*Math.PI*40;
+  const dash=total?(avail/total*circ):0;
+
+  el.innerHTML=`
+    <!-- ═══ تابز ═══ -->
+    <div class="db-tabs">
+      <button class="db-tab on" onclick="dbTab('overview',this)">📊 نظرة عامة</button>
+      <button class="db-tab" onclick="dbTab('pros',this)">🔨 المحترفون</button>
+      <button class="db-tab" onclick="dbTab('ratings',this)">⭐ التقييمات</button>
+      <button class="db-tab" onclick="dbTab('toprated',this)">🏆 الأعلى تقييماً</button>
+      <button class="db-tab" onclick="dbTab('requests',this)">📨 الطلبات <span style="background:#ef4444;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-right:4px">${myRequests.length}</span></button>
+      <button class="db-tab" onclick="dbTab('block',this)">🚫 الحظر</button>
+      <button class="db-tab" onclick="dbTab('badrevs',this)">🗑️ التقييمات السيئة</button>
+      <button class="db-tab" onclick="dbTab('activity',this)">👁️ النشاط</button>
+    </div>
+
+    <!-- ═══ TAB: OVERVIEW ═══ -->
+    <div id="dbt-overview">
+      <div class="db-stat-grid">
+        <div class="db-stat" style="border-top:3px solid #1a56db">
+          <div class="db-stat-icon">🔨</div>
+          <div class="db-stat-num" style="color:#1a56db">${total}</div>
+          <div class="db-stat-lbl">إجمالي المسجّلين</div>
+        </div>
+        <div class="db-stat" style="border-top:3px solid #22c55e">
+          <div class="db-stat-icon">✅</div>
+          <div class="db-stat-num" style="color:#22c55e">${avail}</div>
+          <div class="db-stat-lbl">متاح الآن</div>
+        </div>
+        <div class="db-stat" style="border-top:3px solid #7c3aed">
+          <div class="db-stat-icon">✓</div>
+          <div class="db-stat-num" style="color:#7c3aed">${verified}</div>
+          <div class="db-stat-lbl">موثّق</div>
+        </div>
+        <div class="db-stat" style="border-top:3px solid #f59e0b">
+          <div class="db-stat-icon">⭐</div>
+          <div class="db-stat-num" style="color:#f59e0b">${totalRevs}</div>
+          <div class="db-stat-lbl">إجمالي التقييمات</div>
+        </div>
+      </div>
+
+      ${avgAll?`<div class="chart-wrap" style="text-align:center;margin-bottom:16px">
+        <div class="chart-title">📈 متوسط التقييم العام</div>
+        <div style="font-size:48px;font-weight:900;color:#f59e0b;line-height:1">${avgAll.toFixed(1)}</div>
+        <div style="display:flex;justify-content:center;gap:2px;margin-top:6px;font-size:20px">
+          ${[1,2,3,4,5].map(i=>`<span style="color:${i<=Math.round(avgAll)?'#f59e0b':'#e2e8f0'}">★</span>`).join('')}
+        </div>
+        <div style="font-size:12px;color:var(--text3);margin-top:4px">من أصل ${totalRevs} تقييم</div>
+      </div>`:''}
+
+      <div class="chart-wrap" style="margin-bottom:16px">
+        <div class="chart-title">👥 توزيع حسب النوع</div>
+        ${Object.entries(byType).map(([type,cnt])=>`
+          <div class="db-hbar-row">
+            <div class="db-hbar-label">${TEM[type]||'👤'} ${typeLabels[type]||type}</div>
+            <div class="db-hbar-track"><div class="db-hbar-fill" style="width:${Math.round(cnt/typeMax*100)}%;background:${typeColors[type]||'#64748b'}"></div></div>
+            <div class="db-hbar-val" style="color:${typeColors[type]||'#64748b'}">${cnt}</div>
+          </div>`).join('')}
+      </div>
+
+      <div class="chart-wrap" style="margin-bottom:16px">
+        <div class="chart-title">📍 توزيع حسب المنطقة</div>
+        ${topAreas.length?topAreas.map(([area,cnt],i)=>`
+          <div class="db-hbar-row">
+            <div class="db-hbar-label">📍 ${area}</div>
+            <div class="db-hbar-track"><div class="db-hbar-fill" style="width:${Math.round(cnt/areaMax*100)}%;background:${clrs[i]}"></div></div>
+            <div class="db-hbar-val" style="color:${clrs[i]}">${cnt}</div>
+          </div>`).join(''):'<div style="color:var(--text3);font-size:13px">لا بيانات</div>'}
+      </div>
+
+      <div class="chart-wrap" style="text-align:center;margin-bottom:0">
+        <div class="chart-title">⚡ نسبة الإتاحة</div>
+        <svg class="db-pie-svg" width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="var(--gray2)" stroke-width="12"/>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#22c55e" stroke-width="12"
+            stroke-dasharray="${dash.toFixed(1)} ${circ.toFixed(1)}"
+            stroke-dashoffset="${(circ/4).toFixed(1)}" stroke-linecap="round"/>
+          <text x="50" y="55" text-anchor="middle" font-size="18" font-weight="900" fill="#22c55e" font-family="Tajawal,sans-serif">${pct}%</text>
+        </svg>
+        <div class="db-legend">
+          <div class="db-legend-item"><div class="db-legend-dot" style="background:#22c55e"></div>متاح (${avail})</div>
+          <div class="db-legend-item"><div class="db-legend-dot" style="background:#ef4444"></div>مشغول (${busy})</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ TAB: PROS ═══ -->
+    <div id="dbt-pros" style="display:none">
+      <div class="chart-wrap" style="margin-bottom:16px">
+        <div class="chart-title">🏆 أكثر المهن انتشاراً</div>
+        ${topSpecs.length?topSpecs.map(([spec,cnt],i)=>`
+          <div class="db-hbar-row">
+            <div class="db-hbar-label">${spec.split(' ')[0]}</div>
+            <div class="db-hbar-track"><div class="db-hbar-fill" style="width:${Math.round(cnt/specMax*100)}%;background:${clrs[i]}"></div></div>
+            <div class="db-hbar-val" style="color:${clrs[i]}">${cnt}</div>
+          </div>`).join(''):'<div style="color:var(--text3);font-size:13px">لا بيانات</div>'}
+      </div>
+      <div class="db-stat-grid">
+        <div class="db-stat" style="border-top:3px solid #22c55e">
+          <div class="db-stat-icon">✅</div>
+          <div class="db-stat-num" style="color:#22c55e">${avail}</div>
+          <div class="db-stat-lbl">متاح الآن</div>
+        </div>
+        <div class="db-stat" style="border-top:3px solid #ef4444">
+          <div class="db-stat-icon">🔴</div>
+          <div class="db-stat-num" style="color:#ef4444">${busy}</div>
+          <div class="db-stat-lbl">مشغول</div>
+        </div>
+        <div class="db-stat" style="border-top:3px solid #7c3aed">
+          <div class="db-stat-icon">✓</div>
+          <div class="db-stat-num" style="color:#7c3aed">${verified}</div>
+          <div class="db-stat-lbl">موثّق</div>
+        </div>
+        <div class="db-stat" style="border-top:3px solid #94a3b8">
+          <div class="db-stat-icon">❓</div>
+          <div class="db-stat-num" style="color:#94a3b8">${total-verified}</div>
+          <div class="db-stat-lbl">غير موثّق</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ TAB: RATINGS ═══ -->
+    <div id="dbt-ratings" style="display:none">
+      ${avgAll?`<div class="chart-wrap" style="text-align:center;margin-bottom:16px">
+        <div style="font-size:42px;font-weight:900;color:#f59e0b">${avgAll.toFixed(1)} ⭐</div>
+        <div style="font-size:12px;color:var(--text3);margin-top:4px">متوسط عام من ${totalRevs} تقييم</div>
+      </div>`:''}
+      <div class="chart-wrap" style="margin-bottom:16px">
+        <div class="chart-title">⭐ توزيع النجوم</div>
+        ${Object.entries(byStar).reverse().map(([s,c])=>`
+          <div class="db-hbar-row">
+            <div class="db-hbar-label">${'★'.repeat(+s)}</div>
+            <div class="db-hbar-track"><div class="db-hbar-fill" style="width:${totalRevs?Math.round(c/totalRevs*100):0}%;background:${starClrs[s]}"></div></div>
+            <div class="db-hbar-val" style="color:${starClrs[s]}">${c}</div>
+          </div>`).join('')}
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">💬 آخر التقييمات</div>
+        ${allRevs.slice(-5).reverse().map(r=>`
+          <div class="db-activity">
+            <div class="db-act-icon" style="background:#fef3c7;color:#f59e0b">${'★'.repeat(r.stars)}</div>
+            <div class="db-act-text">${r.author}: ${r.text||'بدون تعليق'}</div>
+            <div class="db-act-time">${r.date}</div>
+          </div>`).join('')||'<div style="color:var(--text3);font-size:13px;padding:10px 0">لا تقييمات بعد</div>'}
+      </div>
+    </div>
+
+    <!-- ═══ TAB: TOP RATED ═══ -->
+    <div id="dbt-toprated" style="display:none">
+      <div class="chart-wrap">
+        <div class="chart-title">🏆 الأعلى تقييماً</div>
+        ${topRated.length?topRated.map((p,i)=>{
+          const avg=avgRating(p);
+          return`<div class="db-top-item">
+            <div class="db-medal">${medals[i]}</div>
+            <div style="width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;background:${TBG[p.type]||'#f1f5f9'};color:${TCL[p.type]||'#475569'};flex-shrink:0">${TEM[p.type]||'👤'}</div>
+            <div style="flex:1;min-width:0">
+              <div class="db-top-name">${p.name} ${p.verified?'<span style="color:#22c55e;font-size:11px">✓</span>':''}</div>
+              <div class="db-top-spec">${p.spec} · ${p.area}</div>
+            </div>
+            <div style="text-align:left;flex-shrink:0">
+              <div class="db-top-score">⭐ ${avg.toFixed(1)}</div>
+              <div style="font-size:10px;color:var(--text3)">${p.reviews.length} تقييم</div>
+            </div>
+          </div>`;
+        }).join(''):'<div style="color:var(--text3);font-size:13px;padding:20px 0;text-align:center">لا يوجد تقييمات بعد</div>'}
+      </div>
+    </div>
+  `;
+
+  // إضافة تاب الطلبات
+  document.getElementById('dashboard-content').insertAdjacentHTML('beforeend',`
+    <div id="dbt-requests" style="display:none">
+      <div class="chart-wrap" style="margin-bottom:0">
+        <div class="chart-title">📨 الطلبات الواردة (${myRequests.length})</div>
+        ${myRequests.length===0
+          ?'<div style="text-align:center;padding:30px 0;color:var(--text3)"><div style="font-size:36px;margin-bottom:8px">📭</div><div style="font-weight:700">لا توجد طلبات بعد</div></div>'
+          :[...myRequests].reverse().map(r=>`
+            <div style="border:1px solid var(--gray2);border-radius:var(--rsm);padding:12px 14px;margin-bottom:10px;background:${r.status==='new'?'#fff':'var(--gray)'}">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="background:${r.status==='new'?'#dbeafe':'#f1f5f9'};color:${r.status==='new'?'#1a56db':'#94a3b8'};border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700">${r.status==='new'?'● جديد':'✓ تمت المعالجة'}</span>
+                  <span style="font-size:11px;color:var(--text3)">${r.date}</span>
+                </div>
+                <button onclick="markReqDone(${r.id})" style="background:${r.status==='new'?'var(--blue-lt)':'var(--gray)'};color:${r.status==='new'?'var(--blue)':'var(--text3)'};border:none;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;cursor:pointer">${r.status==='new'?'✓ تمت المعالجة':'↩ إعادة فتح'}</button>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+                <div>
+                  <div style="font-size:10px;color:var(--text3);margin-bottom:2px">👤 الطالب</div>
+                  <div style="font-size:13px;font-weight:700">${r.clientName||'مستخدم'}</div>
+                  <div style="font-size:11px;color:var(--blue)">#${r.clientCode||'—'}</div>
+                </div>
+                <div>
+                  <div style="font-size:10px;color:var(--text3);margin-bottom:2px">📞 التواصل</div>
+                  <div style="font-size:13px;font-weight:700;direction:ltr;text-align:right">${r.phone||'—'}</div>
+                  ${r.phone?'<a href="https://wa.me/963'+r.phone.replace(/^0/,'')+'" style="font-size:11px;color:#25d366;font-weight:700">واتساب ↗</a>':''}
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <div>
+                  <div style="font-size:10px;color:var(--text3);margin-bottom:2px">🔨 المهنة</div>
+                  <div style="font-size:13px;font-weight:700">${r.spec}</div>
+                </div>
+                <div>
+                  <div style="font-size:10px;color:var(--text3);margin-bottom:2px">📍 الموقع</div>
+                  <div style="font-size:13px;font-weight:700">${r.area}</div>
+                </div>
+              </div>
+              ${r.det?'<div style="margin-top:8px;padding:8px 10px;background:var(--gray);border-radius:6px;font-size:12px;color:var(--text2)">💬 '+r.det+'</div>':''}
+            </div>`).join('')}
+      </div>
+    </div>
+  `);
+
+  // ═══ تاب الحظر ═══
+  document.getElementById('dashboard-content').insertAdjacentHTML('beforeend',`
+    <div id="dbt-block" style="display:none">
+      <div class="chart-wrap" style="margin-bottom:10px">
+        <div class="chart-title">🚫 حظر مستخدم</div>
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+          <input id="block-input" class="fi" placeholder="رقم الهاتف أو البريد..." style="flex:1">
+          <button onclick="blockUser()" style="background:#ef4444;color:#fff;border:none;border-radius:var(--rsm);padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">🚫 حظر</button>
+        </div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:6px">المستخدمون المسجّلون (اضغط للحظر):</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          ${users.filter(u=>u.type!=='admin').map(u=>`
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:${blockedUsers.includes(u.phone||u.email)?'#fee2e2':'var(--gray)'};border-radius:var(--rsm);border:1px solid ${blockedUsers.includes(u.phone||u.email)?'#fca5a5':'var(--gray2)'}">
+              <div style="font-size:18px">${blockedUsers.includes(u.phone||u.email)?'🚫':'👤'}</div>
+              <div style="flex:1">
+                <div style="font-weight:700;font-size:13px">${u.name}</div>
+                <div style="font-size:11px;color:var(--text3)">${u.phone||u.email||'—'} · #${u.userCode||'—'}</div>
+              </div>
+              <button onclick="toggleBlock('${u.phone||u.email}')" style="background:${blockedUsers.includes(u.phone||u.email)?'#fee2e2':'var(--blue-lt)'};color:${blockedUsers.includes(u.phone||u.email)?'#ef4444':'var(--blue)'};border:none;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer">
+                ${blockedUsers.includes(u.phone||u.email)?'رفع الحظر':'حظر'}
+              </button>
+            </div>`).join('')||'<div style="color:var(--text3);font-size:13px;padding:10px 0">لا مستخدمين مسجّلين</div>'}
+        </div>
+      </div>
+      <div class="chart-wrap" style="margin-bottom:0">
+        <div class="chart-title">📋 قائمة المحظورين (${blockedUsers.length})</div>
+        ${blockedUsers.length===0
+          ?'<div style="text-align:center;padding:20px;color:var(--text3)">لا يوجد محظورون</div>'
+          :blockedUsers.map(id=>`
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--gray2)">
+              <span style="font-size:18px">🚫</span>
+              <div style="flex:1;font-size:13px;font-weight:700;color:#ef4444">${id}</div>
+              <button onclick="toggleBlock('${id}')" style="background:var(--gray);border:none;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;color:var(--text2)">رفع الحظر</button>
+            </div>`).join('')}
+      </div>
+    </div>
+  `);
+
+  // ═══ تاب التقييمات السيئة ═══
+  const badRevsList=professionals.flatMap(p=>(p.reviews||[]).map((r,idx)=>({...r,pid:p.id,pname:p.name,idx})));
+  const badRevs=badRevsList.filter(r=>r.stars<=2).sort((a,b)=>a.stars-b.stars);
+  document.getElementById('dashboard-content').insertAdjacentHTML('beforeend',`
+    <div id="dbt-badrevs" style="display:none">
+      <div class="chart-wrap" style="margin-bottom:0">
+        <div class="chart-title">🗑️ التقييمات السيئة (${badRevs.length} تقييم بنجمتين أو أقل)</div>
+        ${badRevs.length===0
+          ?'<div style="text-align:center;padding:30px;color:var(--text3)"><div style="font-size:36px;margin-bottom:8px">✨</div><div style="font-weight:700">لا توجد تقييمات سيئة</div></div>'
+          :badRevs.map(r=>`
+            <div style="border:1px solid #fca5a5;background:#fff5f5;border-radius:var(--rsm);padding:12px 14px;margin-bottom:8px">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+                <div style="flex:1">
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+                    <span style="font-size:14px;color:#ef4444">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span>
+                    <span style="font-size:11px;font-weight:700;color:#ef4444">${r.stars} نجوم</span>
+                  </div>
+                  <div style="font-size:12px;font-weight:700;margin-bottom:2px">👤 ${r.author} على ${r.pname}</div>
+                  ${r.text?`<div style="font-size:12px;color:var(--text2);margin-top:4px">"${r.text}"</div>`:''}
+                  <div style="font-size:11px;color:var(--text3);margin-top:4px">${r.date}</div>
+                </div>
+                <button onclick="deleteBadReview(${r.pid},${r.idx})" style="background:#fee2e2;color:#ef4444;border:none;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0">🗑️ حذف</button>
+              </div>
+            </div>`).join('')}
+      </div>
+    </div>
+  `);
+
+  // ═══ تاب النشاط ═══
+  document.getElementById('dashboard-content').insertAdjacentHTML('beforeend',`
+    <div id="dbt-activity" style="display:none">
+      <div class="chart-wrap" style="margin-bottom:0">
+        <div class="chart-title">👁️ سجل النشاطات (${activityLog.length})</div>
+        ${activityLog.length===0
+          ?'<div style="text-align:center;padding:30px;color:var(--text3)"><div style="font-size:36px;margin-bottom:8px">📋</div><div style="font-weight:700">لا توجد نشاطات مسجّلة بعد</div><div style="font-size:12px;margin-top:4px">النشاطات تُسجَّل عند تسجيل الدخول وإرسال الطلبات والتسجيل</div></div>'
+          :activityLog.map(a=>`
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray2)">
+              <div style="width:34px;height:34px;border-radius:8px;background:${a.color}18;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${a.icon}</div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:700">${a.text}</div>
+                <div style="font-size:11px;color:var(--text3);margin-top:2px">${a.time}</div>
+              </div>
+              <div style="width:8px;height:8px;border-radius:50%;background:${a.color};flex-shrink:0"></div>
+            </div>`).join('')}
+      </div>
+    </div>
+  `);
+  document.getElementById('dashboard-content').insertAdjacentHTML('beforeend',
+    `<button onclick="renderDashboard()" style="width:100%;margin-top:4px;background:var(--gray);border:1px solid var(--gray2);border-radius:var(--rsm);padding:10px;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer">🔄 تحديث البيانات</button>`
+  );
+}
+
+function markReqDone(id){
+  const r=myRequests.find(x=>x.id===id);
+  if(r){r.status=r.status==='new'?'done':'new';renderDashboard();
+  // ارجع لتاب الطلبات
+  setTimeout(()=>{const btn=document.querySelector('.db-tab:last-child');dbTab('requests',btn);},50);}
+}
+
+function dbTab(tab,btn){
+  ['overview','pros','ratings','toprated','requests','block','badrevs','activity'].forEach(t=>{
+    const el=document.getElementById('dbt-'+t);
+    if(el)el.style.display=t===tab?'':'none';
+  });
+  document.querySelectorAll('.db-tab').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+}
+
+function blockUser(){
+  const id=document.getElementById('block-input')?.value.trim();
+  if(!id){alert('يرجى إدخال رقم الهاتف أو البريد');return;}
+  if(blockedUsers.includes(id)){alert('هذا المستخدم محظور مسبقاً');return;}
+  blockedUsers.push(id);
+  activityLog.unshift({type:'block',icon:'🚫',text:`تم حظر: ${id}`,time:new Date().toLocaleString('ar-SY'),color:'#ef4444'});
+  document.getElementById('block-input').value='';
+  renderDashboard();
+  setTimeout(()=>{const btns=document.querySelectorAll('.db-tab');btns.forEach(b=>{if(b.textContent.includes('الحظر'))dbTab('block',b);});},50);
+}
+
+function toggleBlock(id){
+  if(blockedUsers.includes(id)){
+    blockedUsers=blockedUsers.filter(x=>x!==id);
+    activityLog.unshift({type:'unblock',icon:'✅',text:`رُفع الحظر عن: ${id}`,time:new Date().toLocaleString('ar-SY'),color:'#22c55e'});
+  }else{
+    blockedUsers.push(id);
+    activityLog.unshift({type:'block',icon:'🚫',text:`تم حظر: ${id}`,time:new Date().toLocaleString('ar-SY'),color:'#ef4444'});
+  }
+  renderDashboard();
+  setTimeout(()=>{document.querySelectorAll('.db-tab').forEach(b=>{if(b.textContent.includes('الحظر'))dbTab('block',b);});},50);
+}
+
+function deleteBadReview(pid,idx){
+  if(!confirm('حذف هذا التقييم؟'))return;
+  const p=professionals.find(x=>x.id==pid);
+  if(!p)return;
+  const rev=p.reviews[idx];
+  p.reviews.splice(idx,1);
+  activityLog.unshift({type:'delrev',icon:'🗑️',text:`تم حذف تقييم ${rev?.stars||''}★ على ${p.name}`,time:new Date().toLocaleString('ar-SY'),color:'#f59e0b'});
+  renderDashboard();
+  setTimeout(()=>{document.querySelectorAll('.db-tab').forEach(b=>{if(b.textContent.includes('السيئة'))dbTab('badrevs',b);});},50);
+}
+
+function toggleProAvail(id){const p=professionals.find(x=>x.id===id);if(p){p.avail=!p.avail;renderAdmin();}}
+function toggleVerified(id){const p=professionals.find(x=>x.id===id);if(p){p.verified=!p.verified;renderAdmin();}}
+function deletePro(id){if(!confirm('هل أنت متأكد؟'))return;professionals=professionals.filter(p=>p.id!==id);renderAdmin();}
+function saveAdminMember(){
+  const name=document.getElementById('am-name').value.trim();
+  const desc=document.getElementById('am-desc').value.trim();
+  const exp=document.getElementById('am-exp').value;
+  const area=document.getElementById('am-area').value.trim();
+  const phone=document.getElementById('am-phone').value.trim();
+  const wa=document.getElementById('am-wa').value.trim();
+  const type=document.getElementById('am-type').value;
+  if(!name){alert('يرجى إدخال الاسم');return;}
+  if(!amSpecVal){alert('يرجى اختيار المهنة');return;}
+  if(!area){alert('يرجى إدخال المنطقة');return;}
+  if(!phone){alert('يرجى إدخال رقم الهاتف');return;}
+  const photos=getPhotosFromGrid('am-photos-grid');
+  professionals.unshift({id:uid(),name,type,spec:amSpecVal,desc,area,exp,phone,wa,avail:amAvailOn,verified:false,mine:false,avatar:amAvatarData,photos,reviews:[]});
+  success('✅','تم إضافة '+name+'!','مضاف ومنشور للعملاء.');
+}
+function saveSpec(){
+  const name=document.getElementById('sp-name').value.trim();
+  const icon=document.getElementById('sp-icon').value.trim()||'🔧';
+  const type=document.getElementById('sp-type').value;
+  if(!name){alert('يرجى إدخال اسم المهنة');return;}
+  if(specialties.find(s=>s.id===name)){alert('هذه المهنة موجودة');return;}
+  specialties.push({id:name,icon,type});
+  document.getElementById('sp-name').value='';
+  document.getElementById('sp-icon').value='';
+  buildCurSpecs();
+  alert('✅ تمت إضافة مهنة "'+name+'" بنجاح!');
+}
+
+
+/* ══════════ ADMIN EDIT PRO ══════════ */
+function openEditPro(proId){
+  const p=professionals.find(x=>x.id===proId);
+  if(!p)return;
+  epProId=proId;
+  epAvailOn=p.avail;
+  document.getElementById('ep-pro-name').textContent=p.name;
+  document.getElementById('ep-name').value=p.name;
+  document.getElementById('ep-phone').value=p.phone;
+  document.getElementById('ep-wa').value=p.wa||'';
+  document.getElementById('ep-area').value=p.area;
+  document.getElementById('ep-desc').value=p.desc||'';
+  const track=document.getElementById('ep-avail-track');
+  track.className='tog-track '+(p.avail?'on':'');
+  openModal('mo-edit-pro');
+}
+function togEpAvail(){
+  epAvailOn=!epAvailOn;
+  document.getElementById('ep-avail-track').className='tog-track '+(epAvailOn?'on':'');
+}
+function saveEditPro(){
+  const p=professionals.find(x=>x.id===epProId);
+  if(!p)return;
+  const name=document.getElementById('ep-name').value.trim();
+  const phone=document.getElementById('ep-phone').value.trim();
+  const wa=document.getElementById('ep-wa').value.trim();
+  const area=document.getElementById('ep-area').value.trim();
+  const desc=document.getElementById('ep-desc').value.trim();
+  if(!name||!phone||!area){alert('يرجى ملء الاسم والهاتف والمنطقة');return;}
+  p.name=name;p.phone=phone;p.wa=wa;p.area=area;p.desc=desc;p.avail=epAvailOn;
+  closeModal('mo-edit-pro');
+  renderAdmin();
+  alert('✅ تم تعديل ملف '+name+' بنجاح!');
+}
+
+/* ══════════ APP SETTINGS ══════════ */
+function openAppSettings(){
+  document.getElementById('cfg-wa').value=appConfig.waPhone;
+  document.getElementById('cfg-phone').value=appConfig.phone;
+  document.getElementById('cfg-email1').value=appConfig.email1;
+  document.getElementById('cfg-email2').value=appConfig.email2;
+  document.getElementById('cfg-appname').value=appConfig.appName;
+  openModal('mo-app-settings');
+}
+function saveAppSettings(){
+  const wa=document.getElementById('cfg-wa').value.trim();
+  const phone=document.getElementById('cfg-phone').value.trim();
+  const email1=document.getElementById('cfg-email1').value.trim();
+  const email2=document.getElementById('cfg-email2').value.trim();
+  const name=document.getElementById('cfg-appname').value.trim();
+  if(!wa||!phone||!email1){alert('يرجى إدخال واتساب وهاتف وبريد على الأقل');return;}
+  appConfig={waPhone:wa,phone:phone,email1:email1,email2:email2,appName:name||appConfig.appName};
+  // Update displayed app name
+  document.querySelectorAll('.tb-logo').forEach(el=>{
+    // app name updated via SVG logo
+  });
+  closeModal('mo-app-settings');
+  alert('✅ تم حفظ الإعدادات!');
+}
+function getWaLink(msg){return `https://wa.me/${appConfig.waPhone.replace(/[^0-9]/g,'')}?text=${encodeURIComponent(msg||'')}`;}
+
+/* ══════════ FORGOT PASSWORD ══════════ */
+function forgotStep1(){
+  const id=document.getElementById('forgot-id').value.trim();
+  const errEl=document.getElementById('forgot-err');
+  errEl.textContent='';
+  if(!id){errEl.textContent='يرجى إدخال رقم الهاتف أو البريد';return;}
+  const u=users.find(x=>x.phone===id||x.email===id);
+  if(!u){errEl.textContent='لا يوجد حساب بهذا الرقم أو البريد';return;}
+  if(u.type==='admin'){errEl.textContent='حساب الأدمن لا يمكن استرجاعه من هنا';return;}
+  // عرض كلمة المرور
+  document.getElementById('forgot-pass-display').textContent=u.pass;
+  document.getElementById('forgot-step1').style.display='none';
+  document.getElementById('forgot-step2').style.display='';
+}
+function forgotGoLogin(){
+  const pass=document.getElementById('forgot-pass-display').textContent;
+  const id=document.getElementById('forgot-id').value.trim();
+  closeForgot();
+  // ملء حقول الدخول تلقائياً
+  document.getElementById('l-id').value=id;
+  document.getElementById('l-pass').value=pass;
+  go('pg-login');
+}
+function closeForgot(){
+  closeModal('mo-forgot');
+  // إعادة الـ modal لحالته الأولى
+  setTimeout(()=>{
+    document.getElementById('forgot-step1').style.display='';
+    document.getElementById('forgot-step2').style.display='none';
+    document.getElementById('forgot-id').value='';
+    document.getElementById('forgot-err').textContent='';
+    document.getElementById('forgot-pass-display').textContent='';
+  },300);
+}
+
+/* ══════════ MODAL ══════════ */
+function openModal(id){document.getElementById(id).classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.querySelectorAll('.mo').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show');}));
+
+/* ══════════ PWA ══════════ */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
+
+/* ══════════ INIT ══════════ */
+initCitySelects();
+renderPros();
+</script>
+</body>
+</html>
